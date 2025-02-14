@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://wy5bdd230dj1"]
+
+[ext_resource type="Texture2D" uid="uid://gtg04eiik5yw" path="res://assets/trees/Oak_Tree.png" id="1_aup80"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0540"]
+atlas = ExtResource("1_aup80")
+region = Rect2(0, 0, 64, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a5i2v"]
+size = Vector2(10, 6)
+
+[node name="Small_Oak_Stump" type="Sprite2D"]
+position = Vector2(0, -22)
+texture = SubResource("AtlasTexture_w0540")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 19)
+shape = SubResource("RectangleShape2D_a5i2v")
