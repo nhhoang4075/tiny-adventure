@@ -23,10 +23,10 @@ func on_max_damage_reached() -> void:
 
 func add_stump_scence() -> void:
 	var stump_instance = stump_scence.instantiate() as Node2D
-	stump_instance.global_position = global_position
+	stump_instance.global_position = global_position / global_scale
 	get_parent().add_child(stump_instance)
 	
 func add_log_scence() -> void:
 	var log_instance = log_scence.instantiate() as Node2D
-	log_instance.global_position = global_position + Vector2(-10, 20)
+	log_instance.global_position = global_position / global_scale + Vector2(-10, 20)
 	get_parent().add_child(log_instance)

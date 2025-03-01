@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://gvfihmwa0akc"]
 
-[ext_resource type="Script" path="res://collectable_component.gd" id="1_46g80"]
+[ext_resource type="Script" path="res://scences/components/collectable_component.gd" id="1_46g80"]
 
 [node name="CollectableComponent" type="Area2D"]
 collision_layer = 32

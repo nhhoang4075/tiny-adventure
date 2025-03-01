@@ -21,6 +21,6 @@ func on_max_damage_reached() -> void:
 
 func add_stone_scence() -> void:
 	var stone_instance = stone_scence.instantiate() as Node2D
-	stone_instance.global_position = global_position
+	stone_instance.global_position = global_position / global_scale
 	get_parent().add_child(stone_instance)
 	

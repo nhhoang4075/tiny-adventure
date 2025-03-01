@@ -10,6 +10,7 @@ region = Rect2(0, 0, 32, 48)
 size = Vector2(4, 4)
 
 [node name="Small_Oak_Stump" type="Sprite2D"]
+y_sort_enabled = true
 position = Vector2(0, -8)
 texture = SubResource("AtlasTexture_ubbda")
 

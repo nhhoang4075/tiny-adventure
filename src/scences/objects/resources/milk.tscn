@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://blw2e4em3c4xv"]
+
+[ext_resource type="Texture2D" uid="uid://df13bui0qo0" path="res://assets/icons/No Outline/Food_Icons_NO_Outline.png" id="1_qydfl"]
+[ext_resource type="Script" path="res://scences/components/collectable_component.gd" id="2_pm1pp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_djxdh"]
+atlas = ExtResource("1_qydfl")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h1y5m"]
+radius = 4.0
+height = 16.9706
+
+[node name="Milk" type="Sprite2D"]
+texture = SubResource("AtlasTexture_djxdh")
+
+[node name="CollectableComponent" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("2_pm1pp")
+collectable_name = "milk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectableComponent"]
+rotation = 0.785398
+shape = SubResource("CapsuleShape2D_h1y5m")
+debug_color = Color(0.697348, 0.299634, 0.970468, 0.42)
+
+[connection signal="body_entered" from="CollectableComponent" to="CollectableComponent" method="_on_body_entered"]

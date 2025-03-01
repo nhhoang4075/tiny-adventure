@@ -1,0 +1,135 @@
+[gd_scene load_steps=18 format=3 uid="uid://mky5dl3jkt5c"]
+
+[ext_resource type="Texture2D" uid="uid://dc1xuu3oauww7" path="res://assets/animals/Cow/Cow_01.png" id="1_740fv"]
+[ext_resource type="Script" path="res://scences/characters/npcs/cow/cow.gd" id="1_dmnvg"]
+[ext_resource type="Script" path="res://scripts/state_machine/node_state_machine.gd" id="2_6isjq"]
+[ext_resource type="Script" path="res://scences/characters/npcs/idle_state.gd" id="4_7syu2"]
+[ext_resource type="Script" path="res://scences/characters/npcs/walk_state.gd" id="5_kd5cl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6yh71"]
+atlas = ExtResource("1_740fv")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mpvb5"]
+atlas = ExtResource("1_740fv")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rshp4"]
+atlas = ExtResource("1_740fv")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ikgm"]
+atlas = ExtResource("1_740fv")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_deaf4"]
+atlas = ExtResource("1_740fv")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u35cj"]
+atlas = ExtResource("1_740fv")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ajuwx"]
+atlas = ExtResource("1_740fv")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a7i24"]
+atlas = ExtResource("1_740fv")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_blp7g"]
+atlas = ExtResource("1_740fv")
+region = Rect2(192, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uakfm"]
+atlas = ExtResource("1_740fv")
+region = Rect2(224, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c828d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6yh71")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mpvb5")
+}],
+"loop": true,
+"name": &"idling",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rshp4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ikgm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_deaf4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u35cj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ajuwx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a7i24")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_blp7g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uakfm")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xpup"]
+size = Vector2(18, 8)
+
+[node name="Cow" type="CharacterBody2D"]
+y_sort_enabled = true
+collision_layer = 64
+collision_mask = 75
+script = ExtResource("1_dmnvg")
+max_walk_cycle = 3
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -9)
+sprite_frames = SubResource("SpriteFrames_c828d")
+animation = &"walking"
+autoplay = "idling"
+frame = 7
+frame_progress = 0.127731
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_0xpup")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+navigation_layers = 2
+path_postprocessing = 1
+avoidance_enabled = true
+radius = 20.0
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_node_state")]
+script = ExtResource("2_6isjq")
+initial_node_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "animated_sprite_2d")]
+script = ExtResource("4_7syu2")
+character = NodePath("../..")
+animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+
+[node name="Walk" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "animated_sprite_2d", "navigation_agent_2d")]
+script = ExtResource("5_kd5cl")
+character = NodePath("../..")
+animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+navigation_agent_2d = NodePath("../../NavigationAgent2D")
+min_speed = 10.0
+max_speed = 15.0

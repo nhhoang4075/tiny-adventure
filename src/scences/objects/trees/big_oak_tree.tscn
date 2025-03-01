@@ -23,6 +23,7 @@ size = Vector2(10, 11)
 size = Vector2(18, 22)
 
 [node name="Big_Oak_Tree" type="Sprite2D"]
+y_sort_enabled = true
 material = SubResource("ShaderMaterial_l41qd")
 position = Vector2(0, -22)
 texture = SubResource("AtlasTexture_1qpag")

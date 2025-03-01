@@ -31,7 +31,10 @@ func _on_next_transitions() -> void:
 	if !GameInputEvents.is_movement_input():
 		transition.emit("Idle")
 		
-	player.animated_tool_2d.visible = GameInputEvents.use_tool()
+	player.animated_tool_2d.visible = false
+		
+	if (player.current_tool != DataTypes.Tools.None && GameInputEvents.use_tool()):
+		player.animated_tool_2d.visible = true
 		
 	if player.animated_tool_2d.visible:
 		if player.current_tool == DataTypes.Tools.Axe:

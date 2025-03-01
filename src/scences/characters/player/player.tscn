@@ -1153,17 +1153,19 @@ animations = [{
 radius = 4.0
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animated_tool_2d")]
+y_sort_enabled = true
 position = Vector2(0, -7)
 collision_layer = 2
+collision_mask = 65
 script = ExtResource("1_yhkyv")
 animated_tool_2d = NodePath("AnimatedTools")
 
 [node name="AnimatedPlayer" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_x4ux1")
-animation = &"mining_back"
+animation = &"idling_front"
 autoplay = "idling_front"
-frame = 5
-frame_progress = 1.0
+frame_progress = 0.157955
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 3)
@@ -1182,6 +1184,7 @@ animated_sprite_2d = NodePath("../../AnimatedPlayer")
 script = ExtResource("4_e6l1r")
 player = NodePath("../..")
 animated_sprite_2d = NodePath("../../AnimatedPlayer")
+speed = 100
 
 [node name="Chop" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "animated_sprite_2d", "hit_component_collision_shape")]
 script = ExtResource("7_5et35")
@@ -1201,11 +1204,11 @@ player = NodePath("../..")
 animated_sprite_2d = NodePath("../../AnimatedPlayer")
 
 [node name="AnimatedTools" type="AnimatedSprite2D" parent="."]
+z_index = 99
 sprite_frames = SubResource("SpriteFrames_lok76")
-animation = &"axe_back"
+animation = &"axe_front"
 
 [node name="HitComponent" parent="." instance=ExtResource("10_jhxod")]
-current_tool = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitComponent"]
 position = Vector2(0, 3)

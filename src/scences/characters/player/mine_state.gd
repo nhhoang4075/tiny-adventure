@@ -19,6 +19,9 @@ func _on_next_transitions() -> void:
 		transition.emit("Idle")
 
 func _on_enter() -> void:
+	animated_sprite_2d.flip_h = false
+	player.animated_tool_2d.flip_h = false
+	
 	if player.direction == Vector2.UP:
 		animated_sprite_2d.play("mining_back")
 		player.animated_tool_2d.play("pickaxe_back")

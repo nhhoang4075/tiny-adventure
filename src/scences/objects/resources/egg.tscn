@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://2owopuj502vd"]
+
+[ext_resource type="Texture2D" uid="uid://df13bui0qo0" path="res://assets/icons/No Outline/Food_Icons_NO_Outline.png" id="1_ad7xp"]
+[ext_resource type="Script" path="res://scences/components/collectable_component.gd" id="2_agjt6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ah2ni"]
+atlas = ExtResource("1_ad7xp")
+region = Rect2(96, 16, 16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_258m4"]
+radius = 7.0
+
+[node name="Egg" type="Sprite2D"]
+texture = SubResource("AtlasTexture_ah2ni")
+
+[node name="CollectableComponent" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("2_agjt6")
+collectable_name = "egg"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectableComponent"]
+shape = SubResource("CircleShape2D_258m4")
+debug_color = Color(0.697348, 0.299634, 0.970468, 0.42)
+
+[connection signal="body_entered" from="CollectableComponent" to="CollectableComponent" method="_on_body_entered"]
