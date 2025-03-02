@@ -5,11 +5,14 @@ extends NodeState
 @export var navigation_agent_2d: NavigationAgent2D
 @export var min_speed: float = 5.0
 @export var max_speed: float = 10.0
+@export var body_avoidance_component: Area2D
 
 var speed: float
+var body_avoidance_counter: int = 0
 
 func _ready() -> void:
 	navigation_agent_2d.velocity_computed.connect(on_safe_velocity_computed)
+	body_avoidance_component.body_entered.connect(on_body_enter)
 	
 	call_deferred("character_setup")
 
@@ -31,7 +34,6 @@ func set_movement_target() -> void:
 
 func _on_process(delta: float) -> void:
 	pass
-
 
 func _on_physics_process(delta: float) -> void:
 	if navigation_agent_2d.is_navigation_finished():
@@ -56,12 +58,32 @@ func on_safe_velocity_computed(safe_velocity: Vector2) -> void:
 	character.velocity = safe_velocity
 	character.move_and_slide()
 
-
+func on_body_enter(body: Node2D) -> void:
+	var is_walking: bool = character.velocity != Vector2.ZERO || navigation_agent_2d.velocity != Vector2.ZERO
+	
+	if body is Player && is_walking:
+		stop_moving()
+		
+		if body_avoidance_counter > 50:
+			body_avoidance_counter = 0
+			set_movement_target()
+		else:
+			transition.emit("Idle")
 
 func _on_next_transitions() -> void:
-	if character.current_walk_cycle == character.walk_cycles:
-		character.velocity = Vector2.ZERO
+	var current_hour: int = DayNightCycleManager.current_hour
+	var is_sleep_time: bool = current_hour > 20 || current_hour < 5
+	var finish_walk_cycles: bool = character.current_walk_cycle == character.walk_cycles
+	
+	if finish_walk_cycles || is_sleep_time:
+		stop_moving()
 		transition.emit("Idle")
+	
+	body_avoidance_counter += 1
+
+func stop_moving() -> void:
+	character.velocity = Vector2.ZERO
+	navigation_agent_2d.velocity = Vector2.ZERO
 
 func _on_enter() -> void:
 	animated_sprite_2d.play("walking")

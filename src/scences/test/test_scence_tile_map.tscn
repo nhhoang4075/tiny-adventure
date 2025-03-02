@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=4 uid="uid://c27ma6iv4fwuv"]
+[gd_scene load_steps=11 format=4 uid="uid://c27ma6iv4fwuv"]
 
+[ext_resource type="PackedScene" uid="uid://bl2d8386smwb4" path="res://scences/ui/day_night_cycle_component.tscn" id="1_wwddt"]
 [ext_resource type="TileSet" uid="uid://do7a502bj8u4k" path="res://tile_sets/game_tile_set.tres" id="1_xp2to"]
 [ext_resource type="PackedScene" uid="uid://cgcq1btevcy6l" path="res://scences/characters/npcs/chicken/chicken.tscn" id="2_b35sh"]
 [ext_resource type="PackedScene" uid="uid://bs74sdtkjg0t7" path="res://scences/characters/player/player.tscn" id="2_y0lqn"]
@@ -23,6 +24,8 @@ source_geometry_mode = 2
 [node name="TestScenceTileMap" type="Node2D"]
 y_sort_enabled = true
 scale = Vector2(2, 2)
+
+[node name="DayNightCycleComponent" parent="." instance=ExtResource("1_wwddt")]
 
 [node name="GameTileMap" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -92,7 +95,7 @@ navigation_layers = 2
 position = Vector2(264, 399)
 
 [node name="Cow2" parent="Cows" instance=ExtResource("4_xsom7")]
-position = Vector2(276, 343)
+position = Vector2(292, 365)
 
 [node name="GameScreen" parent="." instance=ExtResource("3_872qk")]
 

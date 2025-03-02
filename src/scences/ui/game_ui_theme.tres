@@ -1,6 +1,8 @@
-[gd_resource type="Theme" load_steps=18 format=3 uid="uid://b6vlud0ku3oby"]
+[gd_resource type="Theme" load_steps=36 format=3 uid="uid://b6vlud0ku3oby"]
 
 [ext_resource type="Texture2D" uid="uid://cwwmvdecdo2en" path="res://assets/Sprout Lands - UI Pack - Basic pack/Sprite sheets/basic_ui.png" id="1_g8oru"]
+[ext_resource type="FontFile" uid="uid://csv3uwdd02o1u" path="res://assets/fonts/pixelFont-7-8x14-sproutLands.ttf" id="2_7bis8"]
+[ext_resource type="FontVariation" uid="uid://cd7dk7ay33c0r" path="res://assets/fonts/zx_palm_variation.tres" id="2_d5s08"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h4xho"]
 atlas = ExtResource("1_g8oru")
@@ -12,6 +14,84 @@ texture_margin_left = 7.0
 texture_margin_top = 7.0
 texture_margin_right = 7.0
 texture_margin_bottom = 7.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7juyq"]
+load_path = "res://.godot/imported/basic_ui.png-4cc07d6941eb538a20fb8dfd60c24288.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j1xj4"]
+atlas = SubResource("CompressedTexture2D_7juyq")
+region = Rect2(59, 59, 26, 26)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_brf63"]
+texture = SubResource("AtlasTexture_j1xj4")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7ucoh"]
+load_path = "res://.godot/imported/basic_ui.png-4cc07d6941eb538a20fb8dfd60c24288.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ux8ny"]
+atlas = SubResource("CompressedTexture2D_7ucoh")
+region = Rect2(59, 155, 26, 26)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ma436"]
+texture = SubResource("AtlasTexture_ux8ny")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6tctt"]
+load_path = "res://.godot/imported/basic_ui.png-4cc07d6941eb538a20fb8dfd60c24288.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_upjun"]
+atlas = SubResource("CompressedTexture2D_6tctt")
+region = Rect2(59, 155, 26, 26)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mrco1"]
+texture = SubResource("AtlasTexture_upjun")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_f2wj1"]
+load_path = "res://.godot/imported/basic_ui.png-4cc07d6941eb538a20fb8dfd60c24288.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqqpy"]
+atlas = SubResource("CompressedTexture2D_f2wj1")
+region = Rect2(59, 59, 26, 26)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hputb"]
+texture = SubResource("AtlasTexture_xqqpy")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6hd5"]
+atlas = ExtResource("1_g8oru")
+region = Rect2(568, 195, 35, 18)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d0t6s"]
+texture = SubResource("AtlasTexture_j6hd5")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 3.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yslsy"]
+atlas = ExtResource("1_g8oru")
+region = Rect2(107, 59, 26, 26)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g0udd"]
+texture = SubResource("AtlasTexture_yslsy")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5cevn"]
 load_path = "res://.godot/imported/basic_ui.png-4cc07d6941eb538a20fb8dfd60c24288.ctex"
@@ -84,6 +164,21 @@ region_rect = Rect2(0, 0, 26, 28)
 [resource]
 DarkWoodPanel/base_type = &"PanelContainer"
 DarkWoodPanel/styles/panel = SubResource("StyleBoxTexture_yd34m")
+DayNightButton/base_type = &"Button"
+DayNightButton/styles/focus = SubResource("StyleBoxTexture_brf63")
+DayNightButton/styles/hover = SubResource("StyleBoxTexture_ma436")
+DayNightButton/styles/normal = SubResource("StyleBoxTexture_mrco1")
+DayNightButton/styles/pressed = SubResource("StyleBoxTexture_hputb")
+DayNightCounterPanel/base_type = &"PanelContainer"
+DayNightCounterPanel/styles/panel = SubResource("StyleBoxTexture_d0t6s")
+DayNightLabel/base_type = &"Label"
+DayNightLabel/font_sizes/font_size = 18
+DayNightLabel/fonts/font = ExtResource("2_7bis8")
+InventoryItemPanel/base_type = &"PanelContainer"
+InventoryItemPanel/styles/panel = SubResource("StyleBoxTexture_g0udd")
+InventoryLabel/base_type = &"Label"
+InventoryLabel/font_sizes/font_size = 8
+InventoryLabel/fonts/font = ExtResource("2_d5s08")
 MarginContainer/constants/margin_bottom = 16
 MarginContainer/constants/margin_left = 16
 MarginContainer/constants/margin_right = 16
