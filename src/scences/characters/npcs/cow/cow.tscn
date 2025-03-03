@@ -261,12 +261,11 @@ script = ExtResource("1_dmnvg")
 max_walk_cycle = 3
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -9)
+position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_c828d")
-animation = &"starting_sleep"
+animation = &"idling"
 autoplay = "idling"
-frame = 5
-frame_progress = 1.0
+offset = Vector2(0, -5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)

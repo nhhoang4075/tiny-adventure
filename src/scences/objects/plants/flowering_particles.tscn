@@ -6,10 +6,12 @@ angle_min = -180.0
 angle_max = 180.0
 orbit_velocity_min = -1.0
 orbit_velocity_max = 1.0
-gravity = Vector3(0, -100, 0)
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = -2.23517e-05
+gravity = Vector3(0, -150, 0)
 
 [node name="FloweringParticles" type="GPUParticles2D"]
-amount = 4
+amount = 6
 process_material = SubResource("ParticleProcessMaterial_nmwax")
 lifetime = 0.5
 speed_scale = 0.5

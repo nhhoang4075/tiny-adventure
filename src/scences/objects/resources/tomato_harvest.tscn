@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://66hdeckdt4g4"]
+
+[ext_resource type="Texture2D" uid="uid://53cebpe0mu1k" path="res://assets/icons/Outline/Food_Icons_Outline.png" id="1_6gp3t"]
+[ext_resource type="PackedScene" uid="uid://gvfihmwa0akc" path="res://scences/components/collectable_component.tscn" id="2_oel4s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1orln"]
+atlas = ExtResource("1_6gp3t")
+region = Rect2(0, 64, 16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gdxnc"]
+radius = 8.0
+
+[node name="TomatoHarvest" type="Sprite2D"]
+texture = SubResource("AtlasTexture_1orln")
+
+[node name="CollectableComponent" parent="." instance=ExtResource("2_oel4s")]
+collectable_name = "tomato"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectableComponent"]
+shape = SubResource("CircleShape2D_gdxnc")
+debug_color = Color(0.698039, 0.298039, 0.968627, 0.419608)

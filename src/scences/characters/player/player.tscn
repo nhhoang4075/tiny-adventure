@@ -1435,7 +1435,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_wyayy"]
 radius = 4.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animated_tool_2d")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animated_tool_2d") groups=["player"]]
 y_sort_enabled = true
 position = Vector2(0, -7)
 collision_layer = 2
@@ -1447,13 +1447,16 @@ animated_tool_2d = NodePath("AnimatedTools")
 
 [node name="AnimatedPlayer" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
+position = Vector2(0, 4)
 sprite_frames = SubResource("SpriteFrames_x4ux1")
-animation = &"watering_side"
+animation = &"idling_front"
 autoplay = "idling_front"
+offset = Vector2(0, -4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_r358g")
+debug_color = Color(0.20516, 0.640555, 1.92523e-07, 0.42)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_node_state")]
 script = ExtResource("2_u6vog")

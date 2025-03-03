@@ -6,8 +6,8 @@ extends Control
 @onready var day_label: Label = $DayPanel/MarginContainer/DayLabel
 @onready var time_label: Label = $TimePanel/MarginContainer/TimeLabel
 
-@export var normal_speed: int = 5
-@export var fast_speed: int = 100
+@export var normal_speed: int = 10
+@export var fast_speed: int = 200
 
 func _ready() -> void:
 	DayNightCycleManager.time_tick.connect(on_time_tick)

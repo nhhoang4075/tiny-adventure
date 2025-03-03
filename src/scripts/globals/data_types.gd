@@ -5,12 +5,14 @@ enum Tools {
 	Axe,
 	Pickaxe,
 	Hoe,
-	WateringCan
+	WateringCan,
+	SeedWheat,
+	SeedTomato
 }
 
 enum GrowthStates {
 	Seed,
-	Germinatioin,
+	Germination,
 	Vegetative,
 	Reproduction,
 	Maturity,

@@ -5,6 +5,7 @@ extends PanelContainer
 @onready var tool_3: Button = $MarginContainer/HBoxContainer/Tool3
 @onready var tool_4: Button = $MarginContainer/HBoxContainer/Tool4
 @onready var tool_5: Button = $MarginContainer/HBoxContainer/Tool5
+@onready var tool_6: Button = $MarginContainer/HBoxContainer/Tool6
 
 #func _on_tool_1_pressed() -> void:
 	#ToolManager.select_tool(DataTypes.Tools.Axe)
@@ -27,6 +28,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	tool_3.set_pressed_no_signal(false)
 	tool_4.set_pressed_no_signal(false)
 	tool_5.set_pressed_no_signal(false)
+	tool_6.set_pressed_no_signal(false)
 		
 	if ToolManager.selected_tool == 1:
 		tool_1.set_pressed_no_signal(true)
@@ -36,3 +38,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		tool_3.set_pressed_no_signal(true)
 	elif ToolManager.selected_tool == 4:
 		tool_4.set_pressed_no_signal(true)
+	elif ToolManager.selected_tool == 3:
+		tool_3.set_pressed_no_signal(true)
+	elif ToolManager.selected_tool == 4:
+		tool_4.set_pressed_no_signal(true)
+	elif ToolManager.selected_tool == 5:
+		tool_5.set_pressed_no_signal(true)
+	elif ToolManager.selected_tool == 6:
+		tool_6.set_pressed_no_signal(true)

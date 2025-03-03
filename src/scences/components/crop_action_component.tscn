@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4oicnvxrn6c0"]
+
+[ext_resource type="Script" path="res://scences/components/crop_action_component.gd" id="1_rh5av"]
+
+[node name="CropActionComponent" type="Node"]
+script = ExtResource("1_rh5av")

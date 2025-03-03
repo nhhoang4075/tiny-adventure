@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://mungti8uh0qu"]
+[gd_scene load_steps=13 format=3 uid="uid://mungti8uh0qu"]
 
 [ext_resource type="Theme" uid="uid://b6vlud0ku3oby" path="res://scences/ui/game_ui_theme.tres" id="1_1pr0y"]
 [ext_resource type="Texture2D" uid="uid://dja02nl15r50m" path="res://assets/icons/Outline/Resources_Icons_Outline.png" id="2_18cf5"]
@@ -13,6 +13,20 @@ region = Rect2(0, 64, 16, 16)
 atlas = ExtResource("2_18cf5")
 region = Rect2(0, 0, 16, 16)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2v7x7"]
+load_path = "res://.godot/imported/Food_Icons_Outline.png-009dc69b6e181135c8efc0cfb70fc9f5.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ixxb"]
+atlas = SubResource("CompressedTexture2D_2v7x7")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_i0bsj"]
+load_path = "res://.godot/imported/Food_Icons_Outline.png-009dc69b6e181135c8efc0cfb70fc9f5.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jy15m"]
+atlas = SubResource("CompressedTexture2D_i0bsj")
+region = Rect2(0, 64, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_7i8gq"]
 atlas = ExtResource("3_tf675")
 region = Rect2(96, 16, 16, 16)
@@ -22,7 +36,6 @@ atlas = ExtResource("3_tf675")
 region = Rect2(112, 0, 16, 16)
 
 [node name="InventoryPanel" type="PanelContainer"]
-visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 theme = ExtResource("1_1pr0y")
@@ -69,6 +82,42 @@ size_flags_vertical = 0
 texture = SubResource("AtlasTexture_6536l")
 
 [node name="StoneLabel" type="Label" parent="MarginContainer/VBoxContainer/Stone"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_type_variation = &"InventoryLabel"
+text = "0"
+
+[node name="Wheat" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_type_variation = &"InventoryItemPanel"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Wheat"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = SubResource("AtlasTexture_3ixxb")
+
+[node name="WheatLabel" type="Label" parent="MarginContainer/VBoxContainer/Wheat"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_type_variation = &"InventoryLabel"
+text = "0"
+
+[node name="Tomato" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_type_variation = &"InventoryItemPanel"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Tomato"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = SubResource("AtlasTexture_jy15m")
+
+[node name="TomatoLabel" type="Label" parent="MarginContainer/VBoxContainer/Tomato"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
