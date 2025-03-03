@@ -34,3 +34,5 @@ func _unhandled_input(event: InputEvent) -> void:
 		tool_2.set_pressed_no_signal(true)
 	elif ToolManager.selected_tool == 3:
 		tool_3.set_pressed_no_signal(true)
+	elif ToolManager.selected_tool == 4:
+		tool_4.set_pressed_no_signal(true)

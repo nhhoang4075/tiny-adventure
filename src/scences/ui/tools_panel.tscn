@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cc1cpxlpceyah"]
+[gd_scene load_steps=10 format=3 uid="uid://cc1cpxlpceyah"]
 
 [ext_resource type="Theme" uid="uid://b6vlud0ku3oby" path="res://scences/ui/game_ui_theme.tres" id="1_rhr1p"]
 [ext_resource type="Script" path="res://scences/ui/tools_panel.gd" id="2_b1mqm"]
@@ -21,6 +21,10 @@ region = Rect2(32, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_xhgro"]
 atlas = ExtResource("3_s4nxd")
 region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6mhra"]
+atlas = ExtResource("3_s4nxd")
+region = Rect2(96, 0, 16, 16)
 
 [node name="ToolsPanel" type="PanelContainer"]
 offset_right = 46.0
@@ -68,6 +72,7 @@ custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 theme_type_variation = &"ToolButton"
 toggle_mode = true
+icon = SubResource("AtlasTexture_6mhra")
 icon_alignment = 1
 
 [node name="Tool5" type="Button" parent="MarginContainer/HBoxContainer"]

@@ -36,6 +36,8 @@ func _on_next_transitions() -> void:
 			transition.emit("Mine")
 		elif player.current_tool == DataTypes.Tools.Hoe:
 			transition.emit("Till")
+		elif player.current_tool == DataTypes.Tools.WateringCan:
+			transition.emit("Water")
 
 func _on_enter() -> void:
 	player.animated_tool_2d.visible = false

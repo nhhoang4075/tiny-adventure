@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://c27ma6iv4fwuv"]
+[gd_scene load_steps=12 format=4 uid="uid://c27ma6iv4fwuv"]
 
 [ext_resource type="PackedScene" uid="uid://bl2d8386smwb4" path="res://scences/ui/day_night_cycle_component.tscn" id="1_wwddt"]
 [ext_resource type="TileSet" uid="uid://do7a502bj8u4k" path="res://tile_sets/game_tile_set.tres" id="1_xp2to"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://mky5dl3jkt5c" path="res://scences/characters/npcs/cow/cow.tscn" id="4_xsom7"]
 [ext_resource type="PackedScene" uid="uid://2owopuj502vd" path="res://scences/objects/resources/egg.tscn" id="6_1vsjo"]
 [ext_resource type="PackedScene" uid="uid://blw2e4em3c4xv" path="res://scences/objects/resources/milk.tscn" id="7_504gr"]
+[ext_resource type="PackedScene" uid="uid://xg1t0gc0aolb" path="res://scences/objects/plants/wheat.tscn" id="9_mm4f5"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_s6luh"]
 vertices = PackedVector2Array(771.141, 299.039, 786, 297.391, 786, 317, 768.18, 328.609, 810, 317, 810, 301, 882, 301, 882, 354, 850, 354, 850, 386, 778, 386, 810, 365, 778, 365, 810, 322, 786, 322, 786, 338, 771.844, 338)
@@ -113,3 +114,6 @@ position = Vector2(240.5, 372)
 
 [node name="Milk2" parent="CollectableItems" instance=ExtResource("7_504gr")]
 position = Vector2(240.5, 365)
+
+[node name="Wheat" parent="." instance=ExtResource("9_mm4f5")]
+position = Vector2(432, 399.5)
