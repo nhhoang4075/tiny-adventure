@@ -32,7 +32,7 @@ func _process(delta):
 		if ToolManager.selected_tool == DataTypes.Tools.Hoe:
 			get_cell_in_front_of_player()
 			remove_crop()
-
+	
 	if Input.is_action_just_released("hit") and is_key_pressed:
 		if key_press_time < 1.0 and !is_action_done:
 			is_action_done = true
@@ -42,7 +42,6 @@ func _process(delta):
 
 	if Input.is_action_just_released("hit"):
 		is_key_pressed = false
-
 
 #func _unhandled_input(event: InputEvent) -> void:
 	#if event.is_action_pressed("remove"):
@@ -82,7 +81,7 @@ func add_crop() -> void:
 			get_parent().find_child("Crops").add_child(tomato_instance)
 
 func remove_crop() -> void:
-	if cell_source_id != -1 && distance < 20.0:
+	if distance < 20.0:
 		var crop_nodes = get_parent().find_child("Crops").get_children()
 		
 		for node: Node2D in crop_nodes:

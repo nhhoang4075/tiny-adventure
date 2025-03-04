@@ -4,12 +4,12 @@
 [ext_resource type="TileSet" uid="uid://do7a502bj8u4k" path="res://tile_sets/game_tile_set.tres" id="1_xp2to"]
 [ext_resource type="PackedScene" uid="uid://cgcq1btevcy6l" path="res://scences/characters/npcs/chicken/chicken.tscn" id="2_b35sh"]
 [ext_resource type="PackedScene" uid="uid://bs74sdtkjg0t7" path="res://scences/characters/player/player.tscn" id="2_y0lqn"]
-[ext_resource type="PackedScene" uid="uid://4yn14dt8285n" path="res://scences/components/field_cursor_component.tscn" id="3_734o2"]
 [ext_resource type="PackedScene" uid="uid://cludjbom0d3y7" path="res://scences/ui/game_screen.tscn" id="3_872qk"]
-[ext_resource type="Script" path="res://scences/components/field_cursor_component.gd" id="4_2m0ky"]
 [ext_resource type="PackedScene" uid="uid://mky5dl3jkt5c" path="res://scences/characters/npcs/cow/cow.tscn" id="4_xsom7"]
+[ext_resource type="PackedScene" uid="uid://vxkaucn40lau" path="res://scences/components/field_action_component.tscn" id="5_40l5m"]
 [ext_resource type="PackedScene" uid="uid://c4oicnvxrn6c0" path="res://scences/components/crop_action_component.tscn" id="5_kbv6n"]
 [ext_resource type="PackedScene" uid="uid://2owopuj502vd" path="res://scences/objects/resources/egg.tscn" id="6_1vsjo"]
+[ext_resource type="Script" path="res://scences/components/field_action_component.gd" id="6_gna6g"]
 [ext_resource type="PackedScene" uid="uid://blw2e4em3c4xv" path="res://scences/objects/resources/milk.tscn" id="7_504gr"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_s6luh"]
@@ -47,6 +47,7 @@ tile_map_data = PackedByteArray("AAAiAA0AAgAAAAAAAAAiAAwAAgAAAAAAAAAiAAsAAgAAAAA
 tile_set = ExtResource("1_xp2to")
 
 [node name="FarmLand" type="TileMapLayer" parent="TileMap"]
+tile_map_data = PackedByteArray("AAAdABsABQACAAAAAAAcABsABQABAAAAAAAcABwABQABAAIAAAAdABwABQACAAIAAAAeABwABQAGAAMAAAAeABsABQADAAAAAAAfABwABQADAAAAAAAeAB0ABQABAAIAAAAfAB0ABQADAAIAAAA=")
 tile_set = ExtResource("1_xp2to")
 
 [node name="Undergrowth" type="TileMapLayer" parent="TileMap"]
@@ -70,8 +71,8 @@ tile_set = ExtResource("1_xp2to")
 
 [node name="Crops" type="Node2D" parent="."]
 
-[node name="FieldCursorComponent" parent="." node_paths=PackedStringArray("ground_tile_map_layer", "farm_land_tile_map_layer") instance=ExtResource("3_734o2")]
-script = ExtResource("4_2m0ky")
+[node name="FieldActionComponent" parent="." node_paths=PackedStringArray("ground_tile_map_layer", "farm_land_tile_map_layer") instance=ExtResource("5_40l5m")]
+script = ExtResource("6_gna6g")
 ground_tile_map_layer = NodePath("../TileMap/Ground")
 farm_land_tile_map_layer = NodePath("../TileMap/FarmLand")
 

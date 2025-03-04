@@ -14,7 +14,12 @@ extends PanelContainer
 	#ToolManager.select_tool(DataTypes.Tools.Pickaxe)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("change_tool"):
+	if event.is_action_pressed("previous"):
+		if ToolManager.selected_tool > 0:
+			ToolManager.select_tool(ToolManager.selected_tool - 1)
+		else:
+			ToolManager.select_tool(DataTypes.Tools.size() - 1)
+	elif event.is_action_pressed("next"):
 		if ToolManager.selected_tool < DataTypes.Tools.size() - 1:
 			ToolManager.select_tool(ToolManager.selected_tool + 1)
 		else:
