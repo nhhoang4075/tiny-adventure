@@ -1,0 +1,45 @@
+[gd_scene load_steps=10 format=3 uid="uid://xg1t0gc0aolb"]
+
+[ext_resource type="Script" path="res://scenes/objects/plants/wheat.gd" id="1_mpnsf"]
+[ext_resource type="Texture2D" uid="uid://bctx6b31tk3gy" path="res://assets/crops/Crops.png" id="1_rle0s"]
+[ext_resource type="PackedScene" uid="uid://duns5x2k3qlhc" path="res://scenes/objects/plants/watering_particles.tscn" id="2_ouqqc"]
+[ext_resource type="PackedScene" uid="uid://eoa17gcxug7a" path="res://scenes/components/hurt_component.tscn" id="2_qyswp"]
+[ext_resource type="PackedScene" uid="uid://1r3thd33ngxe" path="res://scenes/objects/plants/flowering_particles.tscn" id="3_ifbsg"]
+[ext_resource type="PackedScene" uid="uid://dwftutai1vcga" path="res://scenes/objects/plants/growth_cycle_component.tscn" id="4_43f5i"]
+[ext_resource type="PackedScene" uid="uid://dgjsj5fvsenbt" path="res://scenes/components/save_data_component.tscn" id="7_xreqb"]
+[ext_resource type="Resource" uid="uid://b1bgwktvnpmtv" path="res://resources/scene_data_resource.tres" id="8_j1e8l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_58fvb"]
+size = Vector2(14, 10)
+
+[node name="Wheat" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_mpnsf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -9)
+texture = ExtResource("1_rle0s")
+hframes = 7
+vframes = 14
+frame = 2
+
+[node name="WateringParticles" parent="." instance=ExtResource("2_ouqqc")]
+fixed_fps = 60
+
+[node name="FloweringParticles" parent="." instance=ExtResource("3_ifbsg")]
+amount = 4
+
+[node name="GrowthCycleComponent" parent="." instance=ExtResource("4_43f5i")]
+days_until_harvest = 5
+
+[node name="HurtComponent" parent="." instance=ExtResource("2_qyswp")]
+position = Vector2(0, 1)
+tool = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtComponent"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_58fvb")
+debug_color = Color(0.867037, 0.401022, 0.15094, 0.42)
+
+[node name="SaveDataComponent" parent="." instance=ExtResource("7_xreqb")]
+save_data_resource = ExtResource("8_j1e8l")

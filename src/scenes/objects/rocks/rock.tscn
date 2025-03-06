@@ -1,0 +1,46 @@
+[gd_scene load_steps=10 format=3 uid="uid://bgf51u6n3j62j"]
+
+[ext_resource type="Shader" path="res://scenes/objects/shake.gdshader" id="1_d4kpi"]
+[ext_resource type="Texture2D" uid="uid://drfrjkiprtnkq" path="res://assets/outdoor_decoration/Ores.png" id="1_n56yr"]
+[ext_resource type="Script" path="res://scenes/objects/rocks/rock.gd" id="2_ehwrv"]
+[ext_resource type="PackedScene" uid="uid://eoa17gcxug7a" path="res://scenes/components/hurt_component.tscn" id="3_fvp38"]
+[ext_resource type="PackedScene" uid="uid://cp00hvc80ubx6" path="res://scenes/components/damage_component.tscn" id="4_3txhp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ml5q7"]
+resource_local_to_scene = true
+shader = ExtResource("1_d4kpi")
+shader_parameter/shake_intensity = 0.0
+shader_parameter/shake_speed = 20.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4gnu"]
+atlas = ExtResource("1_n56yr")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8pyp1"]
+size = Vector2(14, 9)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qy4rt"]
+radius = 8.0
+
+[node name="Rock" type="Sprite2D"]
+material = SubResource("ShaderMaterial_ml5q7")
+position = Vector2(0, -6)
+texture = SubResource("AtlasTexture_y4gnu")
+script = ExtResource("2_ehwrv")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_8pyp1")
+
+[node name="HurtComponent" parent="." instance=ExtResource("3_fvp38")]
+tool = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtComponent"]
+shape = SubResource("CircleShape2D_qy4rt")
+debug_color = Color(0.890175, 0.316488, 0.202998, 0.42)
+
+[node name="DamageComponent" parent="." instance=ExtResource("4_3txhp")]
+max_damage = 3

@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bjle5ecvcrfpe"]
+
+[ext_resource type="Texture2D" uid="uid://d3efpq27rl5b6" path="res://assets/icons/No Outline/Resources_Icons_NO_Outline.png" id="1_t6hfw"]
+[ext_resource type="PackedScene" uid="uid://gvfihmwa0akc" path="res://scenes/components/collectable_component.tscn" id="2_pfqsx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8b1yu"]
+atlas = ExtResource("1_t6hfw")
+region = Rect2(0, 64, 16, 16)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jiies"]
+radius = 3.53553
+height = 16.9706
+
+[node name="Log" type="Sprite2D"]
+texture = SubResource("AtlasTexture_8b1yu")
+
+[node name="CollectableComponent" parent="." instance=ExtResource("2_pfqsx")]
+collectable_name = "log"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectableComponent"]
+rotation = 0.785398
+shape = SubResource("CapsuleShape2D_jiies")
+debug_color = Color(0.697348, 0.299634, 0.970468, 0.42)

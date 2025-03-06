@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://dyfdyjudc4w48"]
+
+[ext_resource type="Script" path="res://resources/node_data_resource.gd" id="1_e8nb5"]
+[ext_resource type="Script" path="res://resources/save_game_data_resource.gd" id="2_nbjh2"]
+
+[resource]
+script = ExtResource("2_nbjh2")
+save_data_nodes = Array[ExtResource("1_e8nb5")]([])
+global_positon = Vector2(0, 0)
+node_path = NodePath("")
+parent_node_path = NodePath("")

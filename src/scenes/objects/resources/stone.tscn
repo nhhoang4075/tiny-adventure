@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7k06sbkclmvb"]
+
+[ext_resource type="Texture2D" uid="uid://d3efpq27rl5b6" path="res://assets/icons/No Outline/Resources_Icons_NO_Outline.png" id="1_mwb83"]
+[ext_resource type="PackedScene" uid="uid://gvfihmwa0akc" path="res://scenes/components/collectable_component.tscn" id="2_w8olw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjg0c"]
+atlas = ExtResource("1_mwb83")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5figf"]
+radius = 6.0
+
+[node name="Stone" type="Sprite2D"]
+texture = SubResource("AtlasTexture_sjg0c")
+
+[node name="CollectableComponent" parent="." instance=ExtResource("2_w8olw")]
+collectable_name = "stone"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectableComponent"]
+shape = SubResource("CircleShape2D_5figf")
+debug_color = Color(0.73306, 0.240485, 0.98833, 0.42)

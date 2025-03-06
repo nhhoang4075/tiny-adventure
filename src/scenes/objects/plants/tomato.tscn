@@ -1,0 +1,42 @@
+[gd_scene load_steps=10 format=3 uid="uid://b75xels8x1cx"]
+
+[ext_resource type="Script" path="res://scenes/objects/plants/tomato.gd" id="1_rgan0"]
+[ext_resource type="Texture2D" uid="uid://bctx6b31tk3gy" path="res://assets/crops/Crops.png" id="1_yq5a5"]
+[ext_resource type="PackedScene" uid="uid://duns5x2k3qlhc" path="res://scenes/objects/plants/watering_particles.tscn" id="2_y2yuh"]
+[ext_resource type="PackedScene" uid="uid://1r3thd33ngxe" path="res://scenes/objects/plants/flowering_particles.tscn" id="3_gq03a"]
+[ext_resource type="PackedScene" uid="uid://dwftutai1vcga" path="res://scenes/objects/plants/growth_cycle_component.tscn" id="4_ivfvl"]
+[ext_resource type="PackedScene" uid="uid://eoa17gcxug7a" path="res://scenes/components/hurt_component.tscn" id="5_x62oj"]
+[ext_resource type="PackedScene" uid="uid://dgjsj5fvsenbt" path="res://scenes/components/save_data_component.tscn" id="7_rnog7"]
+[ext_resource type="Resource" uid="uid://b1bgwktvnpmtv" path="res://resources/scene_data_resource.tres" id="8_sapau"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d3egn"]
+size = Vector2(14, 10)
+
+[node name="Tomato" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_rgan0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -9)
+texture = ExtResource("1_yq5a5")
+hframes = 7
+vframes = 14
+frame = 10
+
+[node name="WateringParticles" parent="." instance=ExtResource("2_y2yuh")]
+
+[node name="FloweringParticles" parent="." instance=ExtResource("3_gq03a")]
+
+[node name="GrowthCycleComponent" parent="." instance=ExtResource("4_ivfvl")]
+days_until_harvest = 6
+
+[node name="HurtComponent" parent="." instance=ExtResource("5_x62oj")]
+tool = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtComponent"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_d3egn")
+debug_color = Color(0.866667, 0.4, 0.14902, 0.419608)
+
+[node name="SaveDataComponent" parent="." instance=ExtResource("7_rnog7")]
+save_data_resource = ExtResource("8_sapau")
