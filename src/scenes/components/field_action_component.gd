@@ -6,9 +6,6 @@ extends Node
 @export var terrain_set: int = 0
 @export var terrain: int = 3
 
-@onready var player: Player = get_tree().get_first_node_in_group("player")
-
-var target_size: int = 12
 var cell_position: Vector2i
 var cell_source_id: int
 var local_cell_position: Vector2
@@ -30,28 +27,28 @@ func _process(delta):
 	if key_press_time >= 2.0 and !is_action_done:
 		is_action_done = true
 		if ToolManager.selected_tool == DataTypes.Tools.Hoe:
-			get_cell_in_front_of_player()
+			get_target_cell()
 			remove_farm_land_cell()
 
 	if Input.is_action_just_released("hit") and is_key_pressed:
 		if key_press_time < 1.0 and !is_action_done:
 			is_action_done = true
 			if ToolManager.selected_tool == DataTypes.Tools.Hoe:
-				get_cell_in_front_of_player()
+				get_target_cell()
 				add_farm_land_cell()
 	
 	if Input.is_action_just_released("hit"):
 		is_key_pressed = false
 
-func get_cell_in_front_of_player() -> void:
-	var player_position = player.global_position / player.global_scale
-	var target_direction = player.sprite_direction * target_size
-	var target_position = player_position + target_direction
+func get_target_cell() -> void:
+	var player_position = Global.player.global_position / Global.player.global_scale
+	var target_position = player_position + Global.player.ray_cast_2d.target_position
 	
 	cell_position = ground_tile_map_layer.local_to_map(target_position)
 	cell_source_id = ground_tile_map_layer.get_cell_source_id(cell_position)
 	local_cell_position = ground_tile_map_layer.map_to_local(cell_position)
 	distance = player_position.distance_to(local_cell_position)
+	print(distance)
 
 func add_farm_land_cell() -> void:
 	if cell_source_id != -1 && distance < 20.0:

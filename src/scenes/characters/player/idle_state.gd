@@ -19,11 +19,14 @@ func _on_physics_process(delta: float) -> void:
 		animated_sprite_2d.play("idling_side")
 
 func _on_next_transitions() -> void:
-	GameInputEvents.movement_input()
+	if !player.can_move:
+		return
+	
+	GameInputEvents.get_movement_input()
 	
 	if GameInputEvents.is_dash_pressed():
 		transition.emit("Dash")
-	elif GameInputEvents.is_movement_input():
+	elif GameInputEvents.is_moving():
 		transition.emit("Walk")
 		
 	player.animated_tool_2d.visible = false

@@ -13,29 +13,34 @@ static var DIRECTIONS = {
 
 static var direction: Vector2
 
+static func get_movement_input() -> Vector2:
+	direction = Input.get_vector("left", "right", "up", "down")
+	
+	return direction
+
 static func movement_input() -> Vector2:
-	if Input.is_action_pressed("move_up") && Input.is_action_pressed("move_left"):
+	if Input.is_action_pressed("up") && Input.is_action_pressed("left"):
 		direction = DIRECTIONS.UP_LEFT
-	elif Input.is_action_pressed("move_up") && Input.is_action_pressed("move_right"):
+	elif Input.is_action_pressed("up") && Input.is_action_pressed("right"):
 		direction = DIRECTIONS.UP_RIGHT
-	elif Input.is_action_pressed("move_down") && Input.is_action_pressed("move_left"):
+	elif Input.is_action_pressed("down") && Input.is_action_pressed("left"):
 		direction = DIRECTIONS.DOWN_LEFT
-	elif Input.is_action_pressed("move_down") && Input.is_action_pressed("move_right"):
+	elif Input.is_action_pressed("down") && Input.is_action_pressed("right"):
 		direction = DIRECTIONS.DOWN_RIGHT
-	elif Input.is_action_pressed("move_up"):
+	elif Input.is_action_pressed("up"):
 		direction = DIRECTIONS.UP
-	elif Input.is_action_pressed("move_down"):
+	elif Input.is_action_pressed("down"):
 		direction = DIRECTIONS.DOWN
-	elif Input.is_action_pressed("move_left"):
+	elif Input.is_action_pressed("left"):
 		direction = DIRECTIONS.LEFT
-	elif Input.is_action_pressed("move_right"):
+	elif Input.is_action_pressed("right"):
 		direction = DIRECTIONS.RIGHT
 	else:
 		direction = Vector2.ZERO
 		
 	return direction
 
-static func is_movement_input() -> bool:
+static func is_moving() -> bool:
 	return direction != Vector2.ZERO
 
 static func sprite_direction() -> Vector2:

@@ -8,7 +8,7 @@ func _ready() -> void:
 	animated_sprite_2d.animation_finished.connect(on_animation_finished)
 
 func on_animation_finished() -> void:
-	if GameInputEvents.is_movement_input():
+	if GameInputEvents.is_moving():
 		transition.emit("Walk")
 	else:
 		transition.emit("Idle")
@@ -33,14 +33,14 @@ func _on_next_transitions() -> void:
 func _on_enter() -> void:
 	animated_sprite_2d.flip_h = false
 	
-	if player.sprite_direction == GameInputEvents.DIRECTIONS.UP:
+	if player.sprite_direction == Vector2.UP:
 		animated_sprite_2d.play("dashing_back")
-	elif player.sprite_direction == GameInputEvents.DIRECTIONS.DOWN:
+	elif player.sprite_direction == Vector2.DOWN:
 		animated_sprite_2d.play("dashing_front")
-	elif player.sprite_direction == GameInputEvents.DIRECTIONS.LEFT:
+	elif player.sprite_direction == Vector2.LEFT:
 		animated_sprite_2d.flip_h = true
 		animated_sprite_2d.play("dashing_side")
-	elif player.sprite_direction == GameInputEvents.DIRECTIONS.RIGHT:
+	elif player.sprite_direction == Vector2.RIGHT:
 		animated_sprite_2d.flip_h = false
 		animated_sprite_2d.play("dashing_side")
 

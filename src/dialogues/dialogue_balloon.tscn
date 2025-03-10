@@ -1,0 +1,198 @@
+[gd_scene load_steps=22 format=3 uid="uid://t4oynsvdokfx"]
+
+[ext_resource type="Script" path="res://dialogues/dialogue_balloon.gd" id="1_uh7wi"]
+[ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_uuny3"]
+[ext_resource type="Texture2D" uid="uid://cwwmvdecdo2en" path="res://assets/Sprout Lands - UI Pack - Basic pack/Sprite sheets/basic_ui.png" id="3_6cvj6"]
+[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_reponses_menu.gd" id="3_cqpns"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4b16h"]
+load_path = "res://.godot/imported/basic_ui.png-4cc07d6941eb538a20fb8dfd60c24288.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y7y3v"]
+atlas = SubResource("CompressedTexture2D_4b16h")
+region = Rect2(59, 107, 26, 26)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ffwph"]
+texture = SubResource("AtlasTexture_y7y3v")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jp24t"]
+load_path = "res://.godot/imported/basic_ui.png-4cc07d6941eb538a20fb8dfd60c24288.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vnoon"]
+atlas = SubResource("CompressedTexture2D_jp24t")
+region = Rect2(59, 107, 26, 26)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0ybmq"]
+texture = SubResource("AtlasTexture_vnoon")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bu80a"]
+load_path = "res://.godot/imported/basic_ui.png-4cc07d6941eb538a20fb8dfd60c24288.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_akt57"]
+atlas = SubResource("CompressedTexture2D_bu80a")
+region = Rect2(59, 107, 26, 26)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jheb5"]
+texture = SubResource("AtlasTexture_akt57")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6k3jl"]
+atlas = ExtResource("3_6cvj6")
+region = Rect2(59, 155, 26, 26)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vt3rv"]
+texture = SubResource("AtlasTexture_6k3jl")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hdu6p"]
+load_path = "res://.godot/imported/basic_ui.png-4cc07d6941eb538a20fb8dfd60c24288.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hp8jx"]
+atlas = SubResource("CompressedTexture2D_hdu6p")
+region = Rect2(59, 59, 26, 26)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k8cep"]
+texture = SubResource("AtlasTexture_hp8jx")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_de4g8"]
+atlas = ExtResource("3_6cvj6")
+region = Rect2(275, 212, 90, 25)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ri0qy"]
+texture = SubResource("AtlasTexture_de4g8")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="Theme" id="Theme_qq3yp"]
+default_font_size = 20
+Button/font_sizes/font_size = 12
+Button/styles/disabled = SubResource("StyleBoxTexture_ffwph")
+Button/styles/focus = SubResource("StyleBoxTexture_0ybmq")
+Button/styles/hover = SubResource("StyleBoxTexture_jheb5")
+Button/styles/normal = SubResource("StyleBoxTexture_vt3rv")
+Button/styles/pressed = SubResource("StyleBoxTexture_k8cep")
+CharacterNameText/base_type = &"RichTextLabel"
+CharacterNameText/colors/default_color = Color(1, 1, 1, 1)
+CharacterNameText/font_sizes/normal_font_size = 16
+DialogueText/base_type = &"RichTextLabel"
+DialogueText/colors/default_color = Color(1, 1, 1, 1)
+DialogueText/font_sizes/normal_font_size = 14
+MarginContainer/constants/margin_bottom = 16
+MarginContainer/constants/margin_left = 32
+MarginContainer/constants/margin_right = 32
+MarginContainer/constants/margin_top = 16
+Panel/styles/panel = SubResource("StyleBoxTexture_ri0qy")
+
+[node name="DialogueBalloon" type="CanvasLayer"]
+layer = 100
+script = ExtResource("1_uh7wi")
+
+[node name="Balloon" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = -1.0
+offset_right = 9.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_qq3yp")
+
+[node name="Panel" type="Panel" parent="Balloon"]
+clip_children = 2
+custom_minimum_size = Vector2(640, 80)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -200.0
+offset_right = 320.0
+offset_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+
+[node name="Dialogue" type="MarginContainer" parent="Balloon/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Balloon/Panel/Dialogue"]
+layout_mode = 2
+
+[node name="CharacterLabel" type="RichTextLabel" parent="Balloon/Panel/Dialogue/VBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.501961)
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+mouse_filter = 1
+theme_type_variation = &"CharacterNameText"
+bbcode_enabled = true
+text = "Character"
+fit_content = true
+scroll_active = false
+
+[node name="DialogueLabel" parent="Balloon/Panel/Dialogue/VBoxContainer" instance=ExtResource("2_uuny3")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"DialogueText"
+text = "Dialogue..."
+
+[node name="Responses" type="MarginContainer" parent="Balloon"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 102.0
+offset_top = -272.0
+offset_right = 353.0
+offset_bottom = -206.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ResponsesMenu" type="VBoxContainer" parent="Balloon/Responses" node_paths=PackedStringArray("response_template")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 2
+script = ExtResource("3_cqpns")
+response_template = NodePath("ResponseExample")
+
+[node name="ResponseExample" type="Button" parent="Balloon/Responses/ResponsesMenu"]
+layout_mode = 2
+text = "Response example"
+
+[connection signal="gui_input" from="Balloon" to="." method="_on_balloon_gui_input"]
+[connection signal="response_selected" from="Balloon/Responses/ResponsesMenu" to="." method="_on_responses_menu_response_selected"]
