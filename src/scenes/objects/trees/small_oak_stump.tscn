@@ -11,12 +11,12 @@ size = Vector2(4, 4)
 
 [node name="Small_Oak_Stump" type="Sprite2D"]
 y_sort_enabled = true
-position = Vector2(0, -8)
+position = Vector2(0, -2)
 texture = SubResource("AtlasTexture_ubbda")
+offset = Vector2(0, -5)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_a5i2v")

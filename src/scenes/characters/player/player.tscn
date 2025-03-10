@@ -1639,7 +1639,7 @@ animated_tool_2d = NodePath("AnimatedTools")
 y_sort_enabled = true
 position = Vector2(0, 4)
 sprite_frames = SubResource("SpriteFrames_x4ux1")
-animation = &"dashing_side"
+animation = &"idling_front"
 autoplay = "idling_front"
 offset = Vector2(0, -4)
 

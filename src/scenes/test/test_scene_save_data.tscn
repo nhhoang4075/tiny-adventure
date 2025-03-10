@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://cvefqdw00avs6"]
+[gd_scene load_steps=20 format=4 uid="uid://cvefqdw00avs6"]
 
 [ext_resource type="PackedScene" uid="uid://bl2d8386smwb4" path="res://scenes/ui/day_night_cycle_component.tscn" id="1_0bf0r"]
 [ext_resource type="PackedScene" uid="uid://dt8lxq34645bx" path="res://scenes/components/save_level_data_component.tscn" id="1_mfng1"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dgjsj5fvsenbt" path="res://scenes/components/save_data_component.tscn" id="6_uqh84"]
 [ext_resource type="PackedScene" uid="uid://cgcq1btevcy6l" path="res://scenes/characters/npcs/chicken/chicken.tscn" id="7_eqjfr"]
 [ext_resource type="Resource" uid="uid://bqmtdg3un55j0" path="res://resources/tile_map_layer_data_resource.tres" id="7_ow5m7"]
+[ext_resource type="PackedScene" uid="uid://w5vktb71ja5m" path="res://scenes/characters/npcs/skeleton/skeleton.tscn" id="8_ismqw"]
 [ext_resource type="PackedScene" uid="uid://mky5dl3jkt5c" path="res://scenes/characters/npcs/cow/cow.tscn" id="8_vvkyq"]
 [ext_resource type="PackedScene" uid="uid://2owopuj502vd" path="res://scenes/objects/resources/egg.tscn" id="9_3qxcf"]
 [ext_resource type="PackedScene" uid="uid://blw2e4em3c4xv" path="res://scenes/objects/resources/milk.tscn" id="10_53bce"]
@@ -39,6 +40,9 @@ scale = Vector2(2, 2)
 script = ExtResource("3_2ja6j")
 
 [node name="DayNightCycleComponent" parent="." instance=ExtResource("1_0bf0r")]
+
+[node name="Skeleton" parent="." instance=ExtResource("8_ismqw")]
+position = Vector2(352.5, 309)
 
 [node name="TileMap" type="Node2D" parent="."]
 y_sort_enabled = true

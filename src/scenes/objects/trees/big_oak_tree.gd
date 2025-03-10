@@ -28,5 +28,5 @@ func add_stump_scene() -> void:
 	
 func add_log_scene() -> void:
 	var log_instance = log_scene.instantiate() as Node2D
-	log_instance.global_position = global_position / global_scale + Vector2(-10, 36)
+	log_instance.global_position = global_position / global_scale + Vector2(-10, 20)
 	get_parent().add_child(log_instance)

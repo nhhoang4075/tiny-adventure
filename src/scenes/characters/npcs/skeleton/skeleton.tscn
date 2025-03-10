@@ -1,0 +1,94 @@
+[gd_scene load_steps=14 format=3 uid="uid://w5vktb71ja5m"]
+
+[ext_resource type="Script" path="res://scenes/characters/npcs/skeleton/skeleton.gd" id="1_avf8d"]
+[ext_resource type="Texture2D" uid="uid://drl5qcgprdqgw" path="res://assets/enemies/Skeleton/Skeleton.png" id="2_kkm0m"]
+[ext_resource type="PackedScene" uid="uid://ylh3r3pp2vav" path="res://scenes/components/interactable_component.tscn" id="3_gueyj"]
+[ext_resource type="PackedScene" uid="uid://dcfy5msowwitr" path="res://scenes/ui/interactable_label_component.tscn" id="4_rcey1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atkf2"]
+atlas = ExtResource("2_kkm0m")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r8e4n"]
+atlas = ExtResource("2_kkm0m")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pvvjh"]
+atlas = ExtResource("2_kkm0m")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tmooc"]
+atlas = ExtResource("2_kkm0m")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nbn4v"]
+atlas = ExtResource("2_kkm0m")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vbc4k"]
+atlas = ExtResource("2_kkm0m")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7wxjh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atkf2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r8e4n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pvvjh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tmooc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nbn4v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vbc4k")
+}],
+"loop": true,
+"name": &"idling_front",
+"speed": 9.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xe633"]
+size = Vector2(8, 8)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kxd27"]
+radius = 16.0
+
+[node name="Skeleton" type="CharacterBody2D"]
+y_sort_enabled = true
+collision_layer = 80
+collision_mask = 75
+script = ExtResource("1_avf8d")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -3)
+sprite_frames = SubResource("SpriteFrames_7wxjh")
+animation = &"idling_front"
+autoplay = "idling_front"
+offset = Vector2(0, -4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_xe633")
+
+[node name="InteractableComponent" parent="." instance=ExtResource("3_gueyj")]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
+position = Vector2(0, -9)
+shape = SubResource("CircleShape2D_kxd27")
+debug_color = Color(0.634716, 0.521044, 0.233839, 0.42)
+
+[node name="InteractableLabelComponent" parent="." instance=ExtResource("4_rcey1")]
+offset_left = -22.0
+offset_top = -35.0
+offset_right = 10.0
+offset_bottom = -3.0

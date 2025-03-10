@@ -17,7 +17,7 @@ atlas = ExtResource("1_faof3")
 region = Rect2(32, 0, 32, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fcofr"]
-size = Vector2(4, 7)
+size = Vector2(4, 4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b6tsl"]
 size = Vector2(10, 14)
@@ -33,7 +33,6 @@ script = ExtResource("2_ud2jp")
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_fcofr")
 
 [node name="HurtComponent" parent="." instance=ExtResource("2_ki5w5")]
