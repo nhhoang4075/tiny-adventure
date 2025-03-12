@@ -2,10 +2,8 @@ extends NodeState
 
 @export var player: Player
 @export var animated_sprite_2d: AnimatedSprite2D
-@export var speed: int = 100
-@export var acceleration: int = 10
-
-var min_speed: float = 5.0
+@export var speed: int = 50
+@export var acceleration: int = 5
 
 func _on_process(delta: float) -> void:
 	pass
@@ -13,10 +11,6 @@ func _on_process(delta: float) -> void:
 func _on_physics_process(delta: float) -> void:
 	player.move_direction = GameInputEvents.get_movement_input()
 	player.velocity = lerp(player.velocity, player.move_direction * speed, acceleration * delta)
-	
-	if player.velocity.length() < min_speed:
-		player.velocity = Vector2.ZERO
-	
 	player.move_and_slide()
 	
 	if GameInputEvents.is_moving():
@@ -36,7 +30,7 @@ func _on_physics_process(delta: float) -> void:
 func _on_next_transitions() -> void:
 	if GameInputEvents.is_dash_pressed():
 		transition.emit("Dash")
-	elif !GameInputEvents.is_moving() && player.velocity == Vector2.ZERO:
+	elif !GameInputEvents.is_moving():
 		transition.emit("Idle")
 		
 	player.animated_tool_2d.visible = false

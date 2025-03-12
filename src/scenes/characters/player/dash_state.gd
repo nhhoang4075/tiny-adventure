@@ -2,7 +2,7 @@ extends NodeState
 
 @export var player: Player
 @export var animated_sprite_2d: AnimatedSprite2D
-@export var dash_speed: int = 120
+@export var dash_speed: int = 60
 
 func _ready() -> void:
 	animated_sprite_2d.animation_finished.connect(on_animation_finished)

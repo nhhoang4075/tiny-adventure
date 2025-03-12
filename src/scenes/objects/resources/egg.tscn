@@ -1,17 +1,31 @@
-[gd_scene load_steps=5 format=3 uid="uid://2owopuj502vd"]
+[gd_scene load_steps=7 format=3 uid="uid://2owopuj502vd"]
 
-[ext_resource type="Texture2D" uid="uid://df13bui0qo0" path="res://assets/icons/No Outline/Food_Icons_NO_Outline.png" id="1_ad7xp"]
+[ext_resource type="Script" path="res://scenes/components/collectable_body_component.gd" id="1_55v0i"]
 [ext_resource type="Script" path="res://scenes/components/collectable_component.gd" id="2_agjt6"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ah2ni"]
-atlas = ExtResource("1_ad7xp")
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rvx4e"]
+load_path = "res://.godot/imported/Food_Icons_NO_Outline.png-9a9f0f69513da00c9bc66e6dde8f2f83.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m5w83"]
+atlas = SubResource("CompressedTexture2D_rvx4e")
 region = Rect2(96, 16, 16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0y5kf"]
+radius = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_258m4"]
 radius = 7.0
 
-[node name="Egg" type="Sprite2D"]
-texture = SubResource("AtlasTexture_ah2ni")
+[node name="Egg" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_55v0i")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_m5w83")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_0y5kf")
 
 [node name="CollectableComponent" type="Area2D" parent="."]
 collision_layer = 32
@@ -22,5 +36,7 @@ collectable_name = "egg"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectableComponent"]
 shape = SubResource("CircleShape2D_258m4")
 debug_color = Color(0.697348, 0.299634, 0.970468, 0.42)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
 
 [connection signal="body_entered" from="CollectableComponent" to="CollectableComponent" method="_on_body_entered"]

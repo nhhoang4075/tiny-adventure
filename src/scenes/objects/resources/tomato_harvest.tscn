@@ -14,6 +14,7 @@ radius = 8.0
 texture = SubResource("AtlasTexture_1orln")
 
 [node name="CollectableComponent" parent="." instance=ExtResource("2_oel4s")]
+collision_layer = 160
 collectable_name = "tomato"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectableComponent"]

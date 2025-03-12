@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://w4ybyh50gc7e"]
+[gd_scene load_steps=12 format=3 uid="uid://w4ybyh50gc7e"]
 
 [ext_resource type="Texture2D" uid="uid://dngh4wvo332wd" path="res://assets/trees/Oak_Tree_Small.png" id="1_faof3"]
 [ext_resource type="PackedScene" uid="uid://eoa17gcxug7a" path="res://scenes/components/hurt_component.tscn" id="2_ki5w5"]
 [ext_resource type="Script" path="res://scenes/objects/trees/small_oak_tree.gd" id="2_ud2jp"]
 [ext_resource type="Shader" path="res://scenes/objects/shake.gdshader" id="3_plk6b"]
 [ext_resource type="PackedScene" uid="uid://cp00hvc80ubx6" path="res://scenes/components/damage_component.tscn" id="4_rf12s"]
+[ext_resource type="PackedScene" uid="uid://dqd3g1ykf2bbg" path="res://scenes/components/modulate_component.tscn" id="6_dvu1w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m6be3"]
 resource_local_to_scene = true
@@ -21,6 +22,10 @@ size = Vector2(4, 4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b6tsl"]
 size = Vector2(10, 14)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4c7bh"]
+radius = 11.0
+height = 28.0
 
 [node name="SmallOakTree" type="Sprite2D"]
 material = SubResource("ShaderMaterial_m6be3")
@@ -45,3 +50,11 @@ debug_color = Color(0.790795, 0.425859, 0.124382, 0.42)
 
 [node name="DamageComponent" parent="." instance=ExtResource("4_rf12s")]
 max_damage = 3
+
+[node name="ModulateComponent" parent="." instance=ExtResource("6_dvu1w")]
+collision_layer = 256
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ModulateComponent"]
+position = Vector2(0, -12)
+shape = SubResource("CapsuleShape2D_4c7bh")

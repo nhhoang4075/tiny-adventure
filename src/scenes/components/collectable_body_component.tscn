@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbvs1dl5eajrh"]
+
+[ext_resource type="Script" path="res://scenes/components/collectable_body_component.gd" id="1_jad8g"]
+
+[node name="CollectableBodyComponent" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_jad8g")
