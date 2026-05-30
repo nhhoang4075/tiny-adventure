@@ -4,7 +4,6 @@ extends Sprite2D
 @onready var damage_component: DamageComponent = $DamageComponent
 
 var stump_scene = preload("res://scenes/objects/trees/small_oak_stump.tscn")
-var log_scene = preload("res://scenes/objects/resources/log.tscn")
 
 func _ready() -> void:
 	hurt_component.hurt.connect(on_hurt)
@@ -18,15 +17,10 @@ func on_hurt(hit_damage: int) -> void:
 
 func on_max_damage_reached() -> void:
 	call_deferred("add_stump_scene")
-	call_deferred("add_log_scene")
+	Drop.spawn(&"log", global_position)
 	queue_free()
 
 func add_stump_scene() -> void:
 	var stump_instance = stump_scene.instantiate() as Node2D
 	stump_instance.global_position = global_position / global_scale
 	get_parent().add_child(stump_instance)
-	
-func add_log_scene() -> void:
-	var log_instance = log_scene.instantiate() as Node2D
-	log_instance.global_position = global_position / global_scale + Vector2(-10, 20)
-	get_parent().add_child(log_instance)
