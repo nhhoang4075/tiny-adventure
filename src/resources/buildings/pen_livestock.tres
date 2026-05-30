@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="BuildingDef" load_steps=3 format=3 uid="uid://penlivestock01"]
+
+[ext_resource type="Script" path="res://scripts/resources/building_def.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://penbuild0001" path="res://scenes/buildings/pen.tscn" id="2"]
+
+[resource]
+script = ExtResource("1")
+id = &"pen_livestock"
+display_name = "Livestock Pen"
+size = Vector2i(9, 8)
+scene = ExtResource("2")
+fence_terrain_set = 0
+fence_terrain = 5
+cost = 0
+capacity = 4
+animal_type = &"livestock"
+navigation_layer = 2
