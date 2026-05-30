@@ -20,26 +20,28 @@ func _on_physics_process(delta: float) -> void:
 
 func _on_next_transitions() -> void:
 	GameInputEvents.movement_input()
-	
+
 	if GameInputEvents.is_dash_pressed():
 		transition.emit("Dash")
 	elif GameInputEvents.is_movement_input():
 		transition.emit("Walk")
-		
+
 	player.animated_tool_2d.visible = false
-		
-	if (player.current_tool != DataTypes.Tools.None && GameInputEvents.use_tool()):
-		player.animated_tool_2d.visible = true
-		
-	if player.animated_tool_2d.visible:
-		if player.current_tool == DataTypes.Tools.Axe:
-			transition.emit("Chop")
-		elif player.current_tool == DataTypes.Tools.Pickaxe:
-			transition.emit("Mine")
-		elif player.current_tool == DataTypes.Tools.Hoe:
-			transition.emit("Till")
-		elif player.current_tool == DataTypes.Tools.WateringCan:
-			transition.emit("Water")
+
+	if GameInputEvents.use_tool():
+		match player.current_tool:
+			DataTypes.Tools.Axe:
+				player.animated_tool_2d.visible = true
+				transition.emit("Chop")
+			DataTypes.Tools.Pickaxe:
+				player.animated_tool_2d.visible = true
+				transition.emit("Mine")
+			DataTypes.Tools.Hoe:
+				player.animated_tool_2d.visible = true
+				transition.emit("Till")
+			DataTypes.Tools.WateringCan:
+				player.animated_tool_2d.visible = true
+				transition.emit("Water")
 
 func _on_enter() -> void:
 	player.animated_tool_2d.visible = false

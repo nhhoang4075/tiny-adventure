@@ -50,6 +50,12 @@ static func is_dash_pressed() -> bool:
 	return Input.is_action_just_pressed("dash")
 
 static func use_tool() -> bool:
-	var use_tool_value: bool = Input.is_action_pressed("hit")
-	
-	return use_tool_value
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and _is_mouse_over_ui():
+		return Input.is_key_pressed(KEY_F)
+	return Input.is_action_pressed("hit")
+
+static func _is_mouse_over_ui() -> bool:
+	var tree := Engine.get_main_loop() as SceneTree
+	if tree == null:
+		return false
+	return tree.root.gui_get_hovered_control() != null

@@ -54,6 +54,7 @@ layout_mode = 2
 
 [node name="Tool1" type="Button" parent="MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
+focus_mode = 0
 layout_mode = 2
 theme_type_variation = &"ToolButton"
 toggle_mode = true
@@ -62,6 +63,7 @@ icon_alignment = 1
 
 [node name="Tool2" type="Button" parent="MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
+focus_mode = 0
 layout_mode = 2
 theme_type_variation = &"ToolButton"
 toggle_mode = true
@@ -70,6 +72,7 @@ icon_alignment = 1
 
 [node name="Tool3" type="Button" parent="MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
+focus_mode = 0
 layout_mode = 2
 theme_type_variation = &"ToolButton"
 toggle_mode = true
@@ -78,6 +81,7 @@ icon_alignment = 1
 
 [node name="Tool4" type="Button" parent="MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
+focus_mode = 0
 layout_mode = 2
 theme_type_variation = &"ToolButton"
 toggle_mode = true
@@ -86,6 +90,7 @@ icon_alignment = 1
 
 [node name="Tool5" type="Button" parent="MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
+focus_mode = 0
 layout_mode = 2
 theme_type_variation = &"ToolButton"
 toggle_mode = true
@@ -94,11 +99,10 @@ icon_alignment = 1
 
 [node name="Tool6" type="Button" parent="MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
+focus_mode = 0
 layout_mode = 2
 theme_type_variation = &"ToolButton"
 toggle_mode = true
 icon = SubResource("AtlasTexture_x0ng3")
 icon_alignment = 1
 
-[connection signal="pressed" from="MarginContainer/HBoxContainer/Tool1" to="." method="_on_tool_1_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/Tool2" to="." method="_on_tool_2_pressed"]
