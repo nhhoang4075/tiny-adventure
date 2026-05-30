@@ -1,6 +1,7 @@
-[gd_scene load_steps=32 format=3 uid="uid://cgcq1btevcy6l"]
+[gd_scene load_steps=33 format=3 uid="uid://cgcq1btevcy6l"]
 
 [ext_resource type="Script" path="res://scenes/characters/npcs/chicken/chicken.gd" id="1_7ifdb"]
+[ext_resource type="PackedScene" uid="uid://prodcomp0001" path="res://scenes/components/production_component.tscn" id="prod_comp"]
 [ext_resource type="Texture2D" uid="uid://c4scwahi78ds4" path="res://assets/animals/Chicken/Chicken_01.png" id="1_sy4sg"]
 [ext_resource type="Script" path="res://scripts/state_machine/node_state_machine.gd" id="2_o0jp8"]
 [ext_resource type="Script" path="res://scenes/characters/npcs/idle_state.gd" id="3_nh7en"]
@@ -251,3 +252,6 @@ body_avoidance_component = NodePath("../../BodyAvoidanceComponent")
 script = ExtResource("6_ym87b")
 character = NodePath("../..")
 animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+
+[node name="ProductionComponent" parent="." instance=ExtResource("prod_comp")]
+product_id = &"egg"

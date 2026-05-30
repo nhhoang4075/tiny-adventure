@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://prodcomp0001"]
+
+[ext_resource type="Script" path="res://scenes/components/production_component.gd" id="1"]
+
+[node name="ProductionComponent" type="Node"]
+script = ExtResource("1")

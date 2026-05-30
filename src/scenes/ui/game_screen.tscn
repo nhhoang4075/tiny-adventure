@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cludjbom0d3y7"]
+[gd_scene load_steps=6 format=3 uid="uid://cludjbom0d3y7"]
 
 [ext_resource type="Theme" uid="uid://b6vlud0ku3oby" path="res://scenes/ui/game_ui_theme.tres" id="1_myufx"]
-[ext_resource type="PackedScene" uid="uid://cc1cpxlpceyah" path="res://scenes/ui/tools_panel.tscn" id="2_y4ip0"]
 [ext_resource type="PackedScene" uid="uid://mungti8uh0qu" path="res://scenes/ui/inventory_panel.tscn" id="3_m84cs"]
 [ext_resource type="PackedScene" uid="uid://bwhme2ttjmc82" path="res://scenes/ui/day_night_panel.tscn" id="4_lhkkn"]
+[ext_resource type="PackedScene" uid="uid://bag123panel001" path="res://scenes/ui/bag_panel.tscn" id="5_bagpn"]
+[ext_resource type="Script" path="res://scenes/ui/currency_label.gd" id="6_curr"]
 
 [node name="GameScreen" type="CanvasLayer"]
 
@@ -19,18 +20,23 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="ToolsPanel" parent="MarginContainer" instance=ExtResource("2_y4ip0")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-
 [node name="InventoryPanel" parent="MarginContainer" instance=ExtResource("3_m84cs")]
 visible = true
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
+size_flags_horizontal = 4
+size_flags_vertical = 8
 
 [node name="DayNightPanel" parent="MarginContainer" instance=ExtResource("4_lhkkn")]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
+
+[node name="CurrencyLabel" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_type_variation = &"DayNightLabel"
+text = "Gold: 0"
+script = ExtResource("6_curr")
+
+[node name="BagPanel" parent="." instance=ExtResource("5_bagpn")]

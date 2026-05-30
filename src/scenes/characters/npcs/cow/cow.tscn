@@ -1,6 +1,7 @@
-[gd_scene load_steps=40 format=3 uid="uid://mky5dl3jkt5c"]
+[gd_scene load_steps=41 format=3 uid="uid://mky5dl3jkt5c"]
 
 [ext_resource type="Texture2D" uid="uid://dc1xuu3oauww7" path="res://assets/animals/Cow/Cow_01.png" id="1_740fv"]
+[ext_resource type="PackedScene" uid="uid://prodcomp0001" path="res://scenes/components/production_component.tscn" id="prod_comp"]
 [ext_resource type="Script" path="res://scenes/characters/npcs/cow/cow.gd" id="1_dmnvg"]
 [ext_resource type="Script" path="res://scripts/state_machine/node_state_machine.gd" id="2_6isjq"]
 [ext_resource type="Script" path="res://scenes/characters/npcs/idle_state.gd" id="4_7syu2"]
@@ -308,5 +309,8 @@ body_avoidance_component = NodePath("../../BodyAvoidanceComponent")
 script = ExtResource("6_5n4hk")
 character = NodePath("../..")
 animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+
+[node name="ProductionComponent" parent="." instance=ExtResource("prod_comp")]
+product_id = &"milk"
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachine/Sleep" method="_on_animation_finished"]
