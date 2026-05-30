@@ -255,7 +255,7 @@ size = Vector2(22, 12)
 [node name="Cow" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_layer = 64
-collision_mask = 75
+collision_mask = 11
 motion_mode = 1
 platform_floor_layers = 4294967229
 script = ExtResource("1_dmnvg")

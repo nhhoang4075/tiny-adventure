@@ -30,14 +30,15 @@ Drop="*res://scripts/globals/drop.gd"
 BuildingManager="*res://scripts/globals/building_manager.gd"
 BuildingPlacer="*res://scripts/building/building_placer.gd"
 AnimalPlacer="*res://scripts/animal/animal_placer.gd"
-DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 GameDialogueManager="*res://scripts/globals/game_dialogue_manager.gd"
 AnimationManager="*res://scripts/globals/animation_manager.gd"
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/mode=2
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 

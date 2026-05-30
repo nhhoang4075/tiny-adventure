@@ -9,6 +9,8 @@ extends NodeState
 
 var speed: float
 var body_avoidance_counter: int = 0
+var _stuck_time: float = 0.0
+var _last_pos: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	navigation_agent_2d.velocity_computed.connect(on_safe_velocity_computed)
@@ -39,7 +41,18 @@ func _on_physics_process(delta: float) -> void:
 	if navigation_agent_2d.is_navigation_finished():
 		set_movement_target()
 		return
-	
+
+	# Phát hiện kẹt: đang đi mà gần như không nhúc nhích → chọn đích mới để thoát.
+	if character.global_position.distance_to(_last_pos) < 0.3:
+		_stuck_time += delta
+		if _stuck_time > 0.7:
+			_stuck_time = 0.0
+			set_movement_target()
+			return
+	else:
+		_stuck_time = 0.0
+	_last_pos = character.global_position
+
 	var target_positon: Vector2 = navigation_agent_2d.get_next_path_position()
 	var target_direction: Vector2 = character.global_position.direction_to(target_positon)
 	var velocity: Vector2 = target_direction * speed
