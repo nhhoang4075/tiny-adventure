@@ -3,12 +3,9 @@ extends Node
 
 @export var farm_land_tile_map_layer: TileMapLayer
 
-@onready var player: Player = get_tree().get_first_node_in_group("player")
-
 var wheat_plant_scene = preload("res://scenes/objects/plants/wheat.tscn")
 var tomato_plant_scene = preload("res://scenes/objects/plants/tomato.tscn")
 
-var target_size: int = 12
 var cell_position: Vector2i
 var cell_source_id: int
 var local_cell_position: Vector2
@@ -54,9 +51,8 @@ func _process(delta):
 			#add_crop()
 
 func get_cell_in_front_of_player() -> void:
-	var player_position = player.global_position / player.global_scale
-	var target_direction = player.sprite_direction * target_size
-	var target_position = player_position + target_direction
+	var player_position = Global.player.global_position / Global.player.global_scale
+	var target_position = player_position + Global.player.ray_cast_2d.target_position
 	
 	cell_position = farm_land_tile_map_layer.local_to_map(target_position)
 	cell_source_id = farm_land_tile_map_layer.get_cell_source_id(cell_position)

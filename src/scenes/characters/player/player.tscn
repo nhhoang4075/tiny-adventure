@@ -1661,7 +1661,6 @@ animated_sprite_2d = NodePath("../../AnimatedPlayer")
 script = ExtResource("4_e6l1r")
 player = NodePath("../..")
 animated_sprite_2d = NodePath("../../AnimatedPlayer")
-speed = 100
 
 [node name="Dash" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "animated_sprite_2d")]
 script = ExtResource("8_gtn1c")
@@ -1702,3 +1701,7 @@ animation = &"none"
 position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_wyayy")
 debug_color = Color(0.620271, 0.400935, 0.900783, 0.42)
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+collision_mask = 89
+collide_with_areas = true

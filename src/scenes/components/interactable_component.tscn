@@ -3,6 +3,8 @@
 [ext_resource type="Script" path="res://scenes/components/interactable_component.gd" id="1_lpo65"]
 
 [node name="InteractableComponent" type="Area2D"]
+collision_layer = 16
+collision_mask = 2
 script = ExtResource("1_lpo65")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

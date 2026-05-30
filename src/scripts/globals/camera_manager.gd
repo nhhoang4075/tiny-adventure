@@ -1,7 +1,7 @@
 extends Node
 
-var min_camera_zoom: float = 0.8
-var max_camera_zoom: float = 1.6
+var min_camera_zoom: float = 2
+var max_camera_zoom: float = 3.6
 var zoom_rate_unit: float = 0.2
 
 func _unhandled_input(event: InputEvent) -> void:

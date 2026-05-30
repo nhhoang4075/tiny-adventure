@@ -1,18 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://bjle5ecvcrfpe"]
+[gd_scene load_steps=7 format=3 uid="uid://b4udr4rg5fuox"]
 
+[ext_resource type="Script" path="res://scenes/components/collectable_body_component.gd" id="1_2de5j"]
 [ext_resource type="Texture2D" uid="uid://d3efpq27rl5b6" path="res://assets/icons/No Outline/Resources_Icons_NO_Outline.png" id="1_t6hfw"]
 [ext_resource type="PackedScene" uid="uid://gvfihmwa0akc" path="res://scenes/components/collectable_component.tscn" id="2_pfqsx"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8b1yu"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_yifkx"]
 atlas = ExtResource("1_t6hfw")
 region = Rect2(0, 64, 16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6ld07"]
+radius = 1.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jiies"]
 radius = 3.53553
 height = 16.9706
 
-[node name="Log" type="Sprite2D"]
-texture = SubResource("AtlasTexture_8b1yu")
+[node name="Log" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_2de5j")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_yifkx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6ld07")
 
 [node name="CollectableComponent" parent="." instance=ExtResource("2_pfqsx")]
 collectable_name = "log"

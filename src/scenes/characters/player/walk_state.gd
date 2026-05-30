@@ -3,34 +3,34 @@ extends NodeState
 @export var player: Player
 @export var animated_sprite_2d: AnimatedSprite2D
 @export var speed: int = 50
+@export var acceleration: int = 5
 
 func _on_process(delta: float) -> void:
 	pass
 
 func _on_physics_process(delta: float) -> void:
-	player.move_direction = GameInputEvents.movement_input()
+	player.move_direction = GameInputEvents.get_movement_input()
+	player.velocity = lerp(player.velocity, player.move_direction * speed, acceleration * delta)
+	player.move_and_slide()
 	
-	if GameInputEvents.is_movement_input():
+	if GameInputEvents.is_moving():
 		player.sprite_direction = GameInputEvents.sprite_direction()
 	
-	if player.sprite_direction == GameInputEvents.DIRECTIONS.UP:
+	if player.sprite_direction == Vector2.UP:
 		animated_sprite_2d.play("walking_back")
-	elif player.sprite_direction == GameInputEvents.DIRECTIONS.DOWN:
+	elif player.sprite_direction == Vector2.DOWN:
 		animated_sprite_2d.play("walking_front")
-	elif player.sprite_direction == GameInputEvents.DIRECTIONS.LEFT:
+	elif player.sprite_direction == Vector2.LEFT:
 		animated_sprite_2d.flip_h = true
 		animated_sprite_2d.play("walking_side")
-	elif player.sprite_direction == GameInputEvents.DIRECTIONS.RIGHT:
+	elif player.sprite_direction == Vector2.RIGHT:
 		animated_sprite_2d.flip_h = false
 		animated_sprite_2d.play("walking_side")
-	
-	player.velocity = player.move_direction * speed
-	player.move_and_slide()
 
 func _on_next_transitions() -> void:
 	if GameInputEvents.is_dash_pressed():
 		transition.emit("Dash")
-	elif !GameInputEvents.is_movement_input():
+	elif !GameInputEvents.is_moving():
 		transition.emit("Idle")
 		
 	player.animated_tool_2d.visible = false

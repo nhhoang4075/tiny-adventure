@@ -1,0 +1,19 @@
+~ start_chicken_pasture_box
+Pasture Box: [[Hi|Hello|Howdy]], your chickens are hungry.
+Pasture Box: Would you like to feed them?
+- Yes! Let's feed them now.
+	do GameDialogueManager.action_feed_animals()
+- No, maybe another time.
+=> exit
+
+~ start_cow_pasture_box
+Pasture Box: [[Hi|Hello|Howdy]], your cows are hungry.
+Pasture Box: Would you like to feed them?
+- Yes! Let's feed them now.
+	do GameDialogueManager.action_feed_animals()
+- No, maybe another time.
+=> exit
+
+~ exit
+do GameDialogueManager.action_exit_dialogue()
+=> END

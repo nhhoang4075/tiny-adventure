@@ -1,0 +1,13 @@
+~ start
+Arthur: [[Hi|Hello|Howdy]], nice to meet you.
+Nathan: Welcome to a new adventure.
+- Who are you?
+	Nathan: I'm Arthur. I am your guider.
+	Player: Oh![wait=0.5s] I'd love that!
+- Yeh, I'm always ready for this.
+	Nathan: Very well.
+- End the conversation => exit
+Arthur: You are free to explore everthing here.
+~ exit
+do GameDialogueManager.action_exit_dialogue()
+=> END
