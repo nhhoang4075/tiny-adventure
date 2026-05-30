@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://c27ma6iv4fwuv"]
+[gd_scene load_steps=15 format=4 uid="uid://c27ma6iv4fwuv"]
 
 [ext_resource type="PackedScene" uid="uid://bl2d8386smwb4" path="res://scenes/ui/day_night_cycle_component.tscn" id="1_s7al0"]
 [ext_resource type="TileSet" uid="uid://do7a502bj8u4k" path="res://tile_sets/game_tile_set.tres" id="2_mlyl8"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://2owopuj502vd" path="res://scenes/objects/resources/egg.tscn" id="9_cx07x"]
 [ext_resource type="PackedScene" uid="uid://blw2e4em3c4xv" path="res://scenes/objects/resources/milk.tscn" id="10_phnyk"]
 [ext_resource type="PackedScene" uid="uid://cludjbom0d3y7" path="res://scenes/ui/game_screen.tscn" id="11_sqhle"]
+[ext_resource type="Script" path="res://scripts/spawn/spawn_zone.gd" id="12_spawn"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_s6luh"]
 vertices = PackedVector2Array(771.141, 299.039, 786, 297.391, 786, 317, 768.18, 328.609, 810, 317, 810, 301, 882, 301, 882, 354, 850, 354, 850, 386, 778, 386, 810, 365, 778, 365, 810, 322, 786, 322, 786, 338, 771.844, 338)
@@ -134,3 +135,12 @@ position = Vector2(240.5, 372)
 position = Vector2(240.5, 365)
 
 [node name="GameScreen" parent="." instance=ExtResource("11_sqhle")]
+
+[node name="RockZone" type="Area2D" parent="."]
+script = ExtResource("12_spawn")
+resource_ids = Array[StringName]([&"rock"])
+max_alive = 10
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RockZone"]
+position = Vector2(361.5, -101.5)
+polygon = PackedVector2Array(277, 224, 421, 205, 464.5, 320, 415, 355, 227, 338, 213, 273)

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ResourceDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/resource_def.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://dyfgrj6ks4fyd" path="res://scenes/objects/trees/big_oak_tree.tscn" id="2"]
+
+[resource]
+script = ExtResource("1")
+id = &"oak_big"
+scene = ExtResource("2")
+max_count = 12
+per_round_min = 1
+per_round_max = 2
+min_spacing = 32.0
