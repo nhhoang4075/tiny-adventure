@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dyfgrj6ks4fyd"]
+[gd_scene load_steps=12 format=3 uid="uid://dyfgrj6ks4fyd"]
 
 [ext_resource type="Texture2D" uid="uid://gtg04eiik5yw" path="res://assets/trees/Oak_Tree.png" id="1_468fy"]
 [ext_resource type="Shader" path="res://scenes/objects/shake.gdshader" id="1_jh3gi"]
 [ext_resource type="Script" path="res://scenes/objects/trees/big_oak_tree.gd" id="2_i5jb7"]
 [ext_resource type="PackedScene" uid="uid://eoa17gcxug7a" path="res://scenes/components/hurt_component.tscn" id="3_gwo0w"]
 [ext_resource type="PackedScene" uid="uid://cp00hvc80ubx6" path="res://scenes/components/damage_component.tscn" id="4_4k81g"]
+[ext_resource type="PackedScene" uid="uid://fadecomp0001" path="res://scenes/components/fade_component.tscn" id="5_fade"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l41qd"]
 resource_local_to_scene = true
@@ -22,7 +23,10 @@ size = Vector2(10, 6)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2bf0k"]
 size = Vector2(18, 22)
 
-[node name="Big_Oak_Tree" type="Sprite2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_canopy"]
+size = Vector2(46, 50)
+
+[node name="BigOakTree" type="Sprite2D"]
 y_sort_enabled = true
 material = SubResource("ShaderMaterial_l41qd")
 position = Vector2(0, -4)
@@ -46,3 +50,9 @@ debug_color = Color(0.922134, 0.267187, 0.202845, 0.42)
 
 [node name="DamageComponent" parent="." instance=ExtResource("4_4k81g")]
 max_damage = 5
+
+[node name="FadeComponent" parent="." instance=ExtResource("5_fade")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FadeComponent"]
+position = Vector2(0, -29)
+shape = SubResource("RectangleShape2D_canopy")

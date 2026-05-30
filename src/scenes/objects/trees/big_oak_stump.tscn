@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://wy5bdd230dj1"]
+[gd_scene load_steps=5 format=3 uid="uid://wy5bdd230dj1"]
 
 [ext_resource type="Texture2D" uid="uid://gtg04eiik5yw" path="res://assets/trees/Oak_Tree.png" id="1_aup80"]
+[ext_resource type="PackedScene" uid="uid://despawncomp01" path="res://scenes/components/despawn_component.tscn" id="2_desp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w0540"]
 atlas = ExtResource("1_aup80")
@@ -9,7 +10,7 @@ region = Rect2(0, 0, 64, 80)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a5i2v"]
 size = Vector2(10, 6)
 
-[node name="Big_Oak_Stump" type="Sprite2D"]
+[node name="BigOakStump" type="Sprite2D"]
 position = Vector2(0, -4)
 texture = SubResource("AtlasTexture_w0540")
 offset = Vector2(0, -18)
@@ -20,3 +21,5 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_a5i2v")
+
+[node name="DespawnComponent" parent="." instance=ExtResource("2_desp")]
