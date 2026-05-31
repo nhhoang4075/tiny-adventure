@@ -1,7 +1,7 @@
 class_name Player
 extends CharacterBody2D
 
-@onready var hit_component: HitComponent = $HitComponent
+@onready var tool_hitbox: ToolHitbox = $HitComponent
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
 
 @export var current_tool: DataTypes.Tools = DataTypes.Tools.None
@@ -17,7 +17,7 @@ func _ready() -> void:
 
 func on_tool_selected(tool: DataTypes.Tools) -> void:
 	current_tool = tool
-	hit_component.current_tool = tool
+	tool_hitbox.current_tool = tool
 
 func _process(delta: float) -> void:
 	if move_direction != Vector2.ZERO:

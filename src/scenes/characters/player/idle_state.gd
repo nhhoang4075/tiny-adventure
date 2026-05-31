@@ -31,20 +31,13 @@ func _on_next_transitions() -> void:
 
 	player.animated_tool_2d.visible = false
 
+	# Data-driven: tool tự khai báo state animation trong ItemDef.action_state.
+	# Thêm tool mới = đặt action_state trong .tres + tạo state cùng tên (không sửa đây).
 	if GameInputEvents.use_tool():
-		match player.current_tool:
-			DataTypes.Tools.Axe:
-				player.animated_tool_2d.visible = true
-				transition.emit("Chop")
-			DataTypes.Tools.Pickaxe:
-				player.animated_tool_2d.visible = true
-				transition.emit("Mine")
-			DataTypes.Tools.Hoe:
-				player.animated_tool_2d.visible = true
-				transition.emit("Till")
-			DataTypes.Tools.WateringCan:
-				player.animated_tool_2d.visible = true
-				transition.emit("Water")
+		var action_state := ToolManager.current_action_state()
+		if action_state != StringName(""):
+			player.animated_tool_2d.visible = true
+			transition.emit(action_state)
 
 func _on_enter() -> void:
 	player.animated_tool_2d.visible = false

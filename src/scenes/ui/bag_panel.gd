@@ -7,7 +7,7 @@ const GRID_ROWS := 5
 @onready var grid: GridContainer = $Backdrop/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Grid
 @onready var backdrop: ColorRect = $Backdrop
 
-var _slots_by_id: Dictionary = {}
+var _slots: Array[InventorySlot] = []
 
 func _ready() -> void:
 	visible = false
@@ -17,22 +17,27 @@ func _ready() -> void:
 	InventoryManager.hotbar_changed.connect(_refresh)
 
 func _build_slots() -> void:
+	# Tạo sẵn lưới ô; mỗi ô có thể hiển thị BẤT KỲ vật phẩm nào (không fix theo id).
 	var total := GRID_COLUMNS * GRID_ROWS
 	for i in total:
 		var slot: InventorySlot = InventorySlotScript.new()
+		slot.slot_clicked.connect(_on_slot_clicked)
 		grid.add_child(slot)
-		if i < ItemRegistry.ordered_ids.size():
-			var id := ItemRegistry.ordered_ids[i]
-			slot.slot_clicked.connect(_on_slot_clicked)
-			_slots_by_id[id] = slot
+		_slots.append(slot)
 	_refresh()
 
 func _refresh() -> void:
+	# Dồn các vật phẩm đang sở hữu vào đầu lưới (theo thứ tự ItemRegistry.ordered_ids
+	# = sort_order). Hết số lượng → has_item false → tự biến mất, các ô sau dồn lên.
+	var owned: Array[String] = []
 	for id in ItemRegistry.ordered_ids:
-		if not _slots_by_id.has(id):
-			continue
-		var slot: InventorySlot = _slots_by_id[id]
 		if InventoryManager.has_item(id):
+			owned.append(id)
+
+	for i in _slots.size():
+		var slot := _slots[i]
+		if i < owned.size():
+			var id := owned[i]
 			slot.set_item(id, InventoryManager.get_count(id))
 			slot.set_highlighted(InventoryManager.is_pinned(id))
 		else:

@@ -2,7 +2,7 @@ extends NodeState
 
 @export var player: Player
 @export var animated_sprite_2d: AnimatedSprite2D
-@export var speed: int = 50
+@export var speed: int = 100
 @export var acceleration: int = 20
 
 func _on_process(delta: float) -> void:
@@ -34,19 +34,14 @@ func _on_next_transitions() -> void:
 		transition.emit("Idle")
 		
 	player.animated_tool_2d.visible = false
-		
-	if (player.current_tool != DataTypes.Tools.None && GameInputEvents.use_tool()):
-		player.animated_tool_2d.visible = true
-		
-	if player.animated_tool_2d.visible:
-		if player.current_tool == DataTypes.Tools.Axe:
-			transition.emit("Chop")
-		elif player.current_tool == DataTypes.Tools.Pickaxe:
-			transition.emit("Mine")
-		elif player.current_tool == DataTypes.Tools.Hoe:
-			transition.emit("Till")
-		elif player.current_tool == DataTypes.Tools.WateringCan:
-			transition.emit("Water")
+
+	# Data-driven: tool tự khai báo state animation trong ItemDef.action_state.
+	# Thêm tool mới = đặt action_state trong .tres + tạo state cùng tên (không sửa đây).
+	if GameInputEvents.use_tool():
+		var action_state := ToolManager.current_action_state()
+		if action_state != StringName(""):
+			player.animated_tool_2d.visible = true
+			transition.emit(action_state)
 
 func _on_enter() -> void:
 	pass

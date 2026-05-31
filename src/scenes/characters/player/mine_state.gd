@@ -25,27 +25,26 @@ func _on_enter() -> void:
 	if player.sprite_direction == Vector2.UP:
 		animated_sprite_2d.play("mining_back")
 		player.animated_tool_2d.play("pickaxe_back")
-		hit_component_collision_shape.position = Vector2(5, -2)
 	elif player.sprite_direction == Vector2.DOWN:
 		animated_sprite_2d.play("mining_front")
 		player.animated_tool_2d.play("pickaxe_front")
-		hit_component_collision_shape.position = Vector2(-5, 8)
 	elif player.sprite_direction == Vector2.LEFT:
 		animated_sprite_2d.flip_h = true
 		player.animated_tool_2d.flip_h = true
 		animated_sprite_2d.play("mining_side")
 		player.animated_tool_2d.play("pickaxe_side")
-		hit_component_collision_shape.position = Vector2(-14, 4)
 	elif player.sprite_direction == Vector2.RIGHT:
 		animated_sprite_2d.flip_h = false
 		player.animated_tool_2d.flip_h = false
 		animated_sprite_2d.play("mining_side")
 		player.animated_tool_2d.play("pickaxe_side")
-		hit_component_collision_shape.position = Vector2(14, 4)
 	else:
 		player.animated_tool_2d.play("none")
-	
-	hit_component_collision_shape.disabled = false
+
+	# Đập đúng object ở ô trước mặt (cùng truy vấn highlight dùng → luôn khớp).
+	var comp = RemoveController.tool_component_in_front()
+	if comp != null:
+		comp.apply_hit(player.tool_hitbox.hit_damage)
 
 func _on_exit() -> void:
 	animated_sprite_2d.stop()

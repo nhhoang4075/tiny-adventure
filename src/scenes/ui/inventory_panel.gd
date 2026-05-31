@@ -58,9 +58,10 @@ func _activate_slot(idx: int) -> void:
 	if data == null:
 		return
 	if data.is_tool:
-		ToolManager.select_tool(data.tool)
+		ToolManager.select_tool(data.tool, id)
 	else:
-		ToolManager.select_tool(DataTypes.Tools.None)
+		# Vật phẩm thường: vẫn chọn được (highlight) dù chưa có hành động dùng.
+		ToolManager.select_tool(DataTypes.Tools.None, id)
 
 func _cycle_tool(direction: int) -> void:
 	var hotbar := InventoryManager.hotbar
@@ -75,8 +76,7 @@ func _cycle_tool(direction: int) -> void:
 		return
 	var current_pos := -1
 	for i in tool_indices.size():
-		var d = ItemRegistry.get_item(hotbar[tool_indices[i]])
-		if d.tool == ToolManager.selected_tool:
+		if hotbar[tool_indices[i]] == ToolManager.selected_item_id:
 			current_pos = i
 			break
 	var next_pos: int = (current_pos + direction + tool_indices.size()) % tool_indices.size()
@@ -91,7 +91,7 @@ func _update_highlight() -> void:
 	for i in _slots.size():
 		var highlight := false
 		if i < InventoryManager.hotbar.size():
-			var data = ItemRegistry.get_item(InventoryManager.hotbar[i])
-			if data != null and data.is_tool and data.tool == ToolManager.selected_tool and ToolManager.selected_tool != DataTypes.Tools.None:
+			var id := InventoryManager.hotbar[i]
+			if id != "" and id == ToolManager.selected_item_id:
 				highlight = true
 		_slots[i].set_highlighted(highlight)

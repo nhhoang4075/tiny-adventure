@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://c27ma6iv4fwuv"]
+[gd_scene load_steps=9 format=4 uid="uid://c27ma6iv4fwuv"]
 
 [ext_resource type="PackedScene" uid="uid://bl2d8386smwb4" path="res://scenes/ui/day_night_cycle_component.tscn" id="1_s7al0"]
 [ext_resource type="TileSet" uid="uid://do7a502bj8u4k" path="res://tile_sets/game_tile_set.tres" id="2_mlyl8"]
@@ -6,24 +6,8 @@
 [ext_resource type="Script" path="res://scenes/components/field_action_component.gd" id="4_qper8"]
 [ext_resource type="PackedScene" uid="uid://c4oicnvxrn6c0" path="res://scenes/components/crop_action_component.tscn" id="5_7dgf7"]
 [ext_resource type="PackedScene" uid="uid://bs74sdtkjg0t7" path="res://scenes/characters/player/player.tscn" id="6_4k3nh"]
-[ext_resource type="PackedScene" uid="uid://cgcq1btevcy6l" path="res://scenes/characters/npcs/chicken/chicken.tscn" id="7_tq3vj"]
-[ext_resource type="PackedScene" uid="uid://mky5dl3jkt5c" path="res://scenes/characters/npcs/cow/cow.tscn" id="8_323rf"]
-[ext_resource type="PackedScene" uid="uid://2owopuj502vd" path="res://scenes/objects/resources/egg.tscn" id="9_cx07x"]
-[ext_resource type="PackedScene" uid="uid://blw2e4em3c4xv" path="res://scenes/objects/resources/milk.tscn" id="10_phnyk"]
 [ext_resource type="PackedScene" uid="uid://cludjbom0d3y7" path="res://scenes/ui/game_screen.tscn" id="11_sqhle"]
 [ext_resource type="Script" path="res://scripts/spawn/spawn_zone.gd" id="12_spawn"]
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_s6luh"]
-vertices = PackedVector2Array(771.141, 299.039, 786, 297.391, 786, 317, 768.18, 328.609, 810, 317, 810, 301, 882, 301, 882, 354, 850, 354, 850, 386, 778, 386, 810, 365, 778, 365, 810, 322, 786, 322, 786, 338, 771.844, 338)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(10, 12, 11), PackedInt32Array(8, 11, 13), PackedInt32Array(4, 8, 13), PackedInt32Array(2, 4, 13, 14), PackedInt32Array(3, 2, 14), PackedInt32Array(3, 14, 15, 16)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(798, 286, 893, 286, 894, 367, 861, 367, 862, 399, 765, 399, 765, 348, 758, 330, 762, 290)])
-source_geometry_mode = 2
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_si7xn"]
-vertices = PackedVector2Array(385, 207, 385, 172.813, 402.781, 180.82, 408.859, 228.578, 403.547, 253.641, 385, 257.813, 385, 241, 359, 241, 359, 207, 359, 257, 273, 257, 273, 175, 359, 175)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 3), PackedInt32Array(0, 3, 6, 7, 8), PackedInt32Array(7, 9, 10, 11), PackedInt32Array(8, 7, 11), PackedInt32Array(8, 11, 12)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(259, 156, 260, 271, 372, 271, 420, 263.5, 437.5, 225, 421, 170, 372, 156)])
-source_geometry_mode = 2
 
 [node name="TestScene" type="Node2D"]
 y_sort_enabled = true
@@ -65,17 +49,16 @@ y_sort_enabled = true
 tile_map_data = PackedByteArray("AAAXAA8AAAAAAAAAAwAZABAAAAAAAAAAAwAfAA8AAAAAAAAAAwAgAA0AAAAAAAAAAwAiABAAAAAAAAAAAwA=")
 tile_set = ExtResource("2_mlyl8")
 
-[node name="Objects" type="TileMapLayer" parent="TileMap" groups=["navigation_polygon_source_geometry_group"]]
-y_sort_enabled = true
-tile_map_data = PackedByteArray("AAANABoABgABAAMAAAANABkABgAAAAAAAAANABgABgAAAAEAAAANABcABgAAAAEAAAANABYABgAAAAAAAAANABUABgAAAAEAAAANABQABgAAAAEAAAAUABoABgADAAEAAAAUABkABgAAAAEAAAAOABoABgACAAAAAAAPABoABgACAAAAAAAQABoABgACAAAAAAARABoABgACAAAAAAASABoABgACAAAAAAATABoABgACAAAAAAAUABUABgAAAAIAAAANABMABgABAAEAAAAOABMABgACAAAAAAAPABMABgACAAAAAAAQABMABgACAAAAAAARABMABgACAAAAAAASABMABgACAAAAAAATABMABgACAAAAAAAUABMABgADAAEAAAAUABQABgAAAAEAAAAlABEABwACAAAAAAAmABEABwACAAAAAAAnABEABwACAAAAAAAoABEABwACAAAAAAApABEABwACAAAAAAAqABEABwADAAEAAAAoABcABwAAAAEAAAAoABYABwABAAEAAAApABYABwACAAAAAAAqABYABwADAAMAAAAqABIABwAAAAEAAAAqABMABwAAAAEAAAAqABQABwAAAAEAAAAqABUABwAAAAEAAAAiABYABwAAAAEAAAAiABcABwAAAAEAAAAkABEABwABAAEAAAAkABQABwAAAAAAAAAiABUABwABAAEAAAAjABUABwACAAAAAAAkABUABwADAAMAAAAkABIABwAAAAIAAAAkABgABwACAAAAAAAjABgABwACAAAAAAAlABgABwACAAAAAAAmABgABwACAAAAAAAnABgABwACAAAAAAAoABgABwADAAMAAAAiABgABwABAAMAAAA=")
-tile_set = ExtResource("2_mlyl8")
+[node name="Overlay" type="Node2D" parent="."]
+z_index = 150
+z_as_relative = false
 
 [node name="Crops" type="Node2D" parent="."]
 
-[node name="FieldActionComponent" parent="." node_paths=PackedStringArray("ground_tile_map_layer", "farm_land_tile_map_layer") instance=ExtResource("3_ebg3q")]
+[node name="FieldActionComponent" parent="." node_paths=PackedStringArray("farm_land_tile_map_layer", "ground_tile_map_layer") instance=ExtResource("3_ebg3q")]
 script = ExtResource("4_qper8")
-ground_tile_map_layer = NodePath("../TileMap/Ground")
 farm_land_tile_map_layer = NodePath("../TileMap/FarmLand")
+ground_tile_map_layer = NodePath("../TileMap/Ground")
 
 [node name="CropActionComponent" parent="." node_paths=PackedStringArray("farm_land_tile_map_layer") instance=ExtResource("5_7dgf7")]
 farm_land_tile_map_layer = NodePath("../TileMap/FarmLand")
@@ -84,55 +67,6 @@ farm_land_tile_map_layer = NodePath("../TileMap/FarmLand")
 position = Vector2(421, 323)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-
-[node name="Chickens" type="Node2D" parent="."]
-y_sort_enabled = true
-position = Vector2(-47, 149)
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Chickens"]
-position = Vector2(-167, -155)
-navigation_polygon = SubResource("NavigationPolygon_s6luh")
-
-[node name="Chicken" parent="Chickens" instance=ExtResource("7_tq3vj")]
-position = Vector2(674, 216)
-
-[node name="Chicken2" parent="Chickens" instance=ExtResource("7_tq3vj")]
-position = Vector2(625, 226)
-
-[node name="Chicken3" parent="Chickens" instance=ExtResource("7_tq3vj")]
-position = Vector2(698, 163)
-
-[node name="Chicken4" parent="Chickens" instance=ExtResource("7_tq3vj")]
-position = Vector2(658, 190)
-
-[node name="Cows" type="Node2D" parent="."]
-y_sort_enabled = true
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="Cows"]
-position = Vector2(-44, 154)
-navigation_polygon = SubResource("NavigationPolygon_si7xn")
-navigation_layers = 2
-
-[node name="Cow" parent="Cows" instance=ExtResource("8_323rf")]
-position = Vector2(264, 399)
-
-[node name="Cow2" parent="Cows" instance=ExtResource("8_323rf")]
-position = Vector2(292, 365)
-
-[node name="CollectableItems" type="Node2D" parent="."]
-y_sort_enabled = true
-
-[node name="Egg1" parent="CollectableItems" instance=ExtResource("9_cx07x")]
-position = Vector2(652, 336)
-
-[node name="Egg2" parent="CollectableItems" instance=ExtResource("9_cx07x")]
-position = Vector2(644, 332)
-
-[node name="Milk" parent="CollectableItems" instance=ExtResource("10_phnyk")]
-position = Vector2(240.5, 372)
-
-[node name="Milk2" parent="CollectableItems" instance=ExtResource("10_phnyk")]
-position = Vector2(240.5, 365)
 
 [node name="GameScreen" parent="." instance=ExtResource("11_sqhle")]
 
