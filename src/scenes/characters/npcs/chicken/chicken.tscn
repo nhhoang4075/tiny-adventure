@@ -1,12 +1,22 @@
-[gd_scene load_steps=33 format=3 uid="uid://cgcq1btevcy6l"]
+[gd_scene load_steps=36 format=3 uid="uid://cgcq1btevcy6l"]
 
 [ext_resource type="Script" path="res://scenes/characters/npcs/chicken/chicken.gd" id="1_7ifdb"]
-[ext_resource type="PackedScene" uid="uid://prodcomp0001" path="res://scenes/components/production_component.tscn" id="prod_comp"]
+[ext_resource type="Shader" path="res://scenes/objects/object_fx.gdshader" id="objfx"]
 [ext_resource type="Texture2D" uid="uid://c4scwahi78ds4" path="res://assets/animals/Chicken/Chicken_01.png" id="1_sy4sg"]
 [ext_resource type="Script" path="res://scripts/state_machine/node_state_machine.gd" id="2_o0jp8"]
 [ext_resource type="Script" path="res://scenes/characters/npcs/idle_state.gd" id="3_nh7en"]
 [ext_resource type="Script" path="res://scenes/characters/npcs/walk_state.gd" id="4_lhkvp"]
 [ext_resource type="Script" path="res://scenes/characters/npcs/sleep_state.gd" id="6_ym87b"]
+[ext_resource type="PackedScene" path="res://scenes/components/hunger_component.tscn" id="hunger_comp"]
+[ext_resource type="PackedScene" uid="uid://prodcomp0001" path="res://scenes/components/production_component.tscn" id="prod_comp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_objfx"]
+resource_local_to_scene = true
+shader = ExtResource("objfx")
+shader_parameter/shake_intensity = 0.0
+shader_parameter/shake_speed = 20.0
+shader_parameter/highlight_color = Color(1, 1, 1, 1)
+shader_parameter/highlight_amount = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ogwx3"]
 atlas = ExtResource("1_sy4sg")
@@ -205,6 +215,7 @@ platform_floor_layers = 4294967229
 script = ExtResource("1_7ifdb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_objfx")
 position = Vector2(0, -3)
 sprite_frames = SubResource("SpriteFrames_hq07r")
 animation = &"starting_sleep"
@@ -255,3 +266,6 @@ animated_sprite_2d = NodePath("../../AnimatedSprite2D")
 
 [node name="ProductionComponent" parent="." instance=ExtResource("prod_comp")]
 product_id = &"egg"
+
+[node name="HungerComponent" parent="." instance=ExtResource("hunger_comp")]
+feed_item_id = &"wheat"

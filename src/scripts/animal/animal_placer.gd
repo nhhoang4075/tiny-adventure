@@ -1,13 +1,15 @@
 extends Node
 
-## Chế độ mua & thả động vật (giống build mode).
-##   H            : bật/tắt
-##   Tab          : đổi loài (gà / bò / ...)
-##   Chuột trái   : thả vào chuồng dưới con trỏ (nếu hợp lệ) → trừ vàng
-##   Esc / phải   : huỷ
+## Vật nuôi là ITEM trong túi.
 ##
-## Hợp lệ = chuồng đúng animal_type + còn chỗ (capacity) + đủ vàng.
-## Ghost = chính scene con vật (tắt process) tô trắng/đỏ.
+## ĐẶT (kiểu Minecraft): chọn item con vật trên hotbar → đi VÀO trong chuồng (qua
+##   cổng) → nhấn F → đặt 1 con (tốn 1 item). Không cần chế độ chuột.
+##
+## MUA (tạm thời tới khi có shop) — chế độ H:
+##   H            : bật/tắt xem trước để mua
+##   Tab          : đổi loài
+##   Enter / click: mua 1 con loài hiện tại (tốn vàng → +1 item vào túi)
+##   Esc / phải   : thoát
 
 const ANIMALS_DIR := "res://resources/animals/"
 const VALID_TINT := Color(1, 1, 1, 0.85)
@@ -17,8 +19,6 @@ var _defs: Array[AnimalDef] = []
 var _index: int = 0
 var _active: bool = false
 var _ghost: Node2D
-var _target_pen: PlacedBuilding
-var _valid: bool = false
 
 func _ready() -> void:
 	_load_defs()
@@ -56,10 +56,18 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		KEY_H:
 			_toggle()
 			get_viewport().set_input_as_handled()
+		KEY_F:
+			# Đặt con vật đang chọn vào chuồng player đang đứng (không cần chế độ).
+			if _place_selected_animal():
+				get_viewport().set_input_as_handled()
 		KEY_TAB:
 			if _active and _defs.size() > 1:
 				_index = (_index + 1) % _defs.size()
 				_rebuild_ghost()
+				get_viewport().set_input_as_handled()
+		KEY_ENTER, KEY_KP_ENTER:
+			if _active:
+				_buy()
 				get_viewport().set_input_as_handled()
 		KEY_ESCAPE:
 			if _active:
@@ -71,13 +79,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			_try_place()
+			_buy()
 			get_viewport().set_input_as_handled()
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
 			_exit()
 			get_viewport().set_input_as_handled()
 
-# ---------------------------------------------------------------- Mode
+# ---------------------------------------------------------------- Buy mode (preview)
 
 func _process(_delta: float) -> void:
 	if not _active or _ghost == null:
@@ -85,12 +93,8 @@ func _process(_delta: float) -> void:
 	var layer := BuildingManager.get_grass_layer()
 	if layer == null:
 		return
-	var def := _def()
-	var cell: Vector2i = layer.local_to_map(layer.get_local_mouse_position())
-	_target_pen = BuildingManager.building_at_cell(cell) as PlacedBuilding
-	_valid = _target_pen != null and _target_pen.can_accept(def.animal_type) and CurrencyManager.can_afford(def.price)
 	_ghost.position = layer.get_local_mouse_position()
-	_ghost.modulate = VALID_TINT if _valid else INVALID_TINT
+	_ghost.modulate = VALID_TINT if CurrencyManager.can_afford(_def().price) else INVALID_TINT
 
 func _toggle() -> void:
 	if _active:
@@ -105,13 +109,12 @@ func _enter() -> void:
 	if BuildingManager.get_grass_layer() == null:
 		return
 	BuildingPlacer.cancel()
+	RemoveController.cancel()
 	_active = true
-	ToolManager.select_tool(DataTypes.Tools.None)
 	_rebuild_ghost()
 
 func _exit() -> void:
 	_active = false
-	_target_pen = null
 	if _ghost != null:
 		_ghost.queue_free()
 		_ghost = null
@@ -125,25 +128,53 @@ func _rebuild_ghost() -> void:
 	if layer == null or def == null or def.scene == null:
 		return
 	_ghost = def.scene.instantiate() as Node2D
-	_ghost.process_mode = Node.PROCESS_MODE_DISABLED  # ghost không tự đi
+	_ghost.process_mode = Node.PROCESS_MODE_DISABLED
 	_ghost.z_index = 100
 	layer.add_child(_ghost)
 
-func _try_place() -> void:
-	if not _valid or _target_pen == null:
-		return
+## MUA 1 con loài hiện tại: tốn vàng → +1 item vào túi.
+func _buy() -> void:
 	var def := _def()
+	if def == null:
+		return
 	if not CurrencyManager.spend(def.price):
 		return
+	InventoryManager.add_collectable(String(def.id))
+
+# ---------------------------------------------------------------- Place by F
+
+## Đặt con vật ĐANG CHỌN trên hotbar vào chuồng player đang đứng. true nếu đã đặt.
+func _place_selected_animal() -> bool:
+	var item: ItemDef = ItemRegistry.get_item(ToolManager.selected_item_id)
+	if item == null or item.category != ItemDef.Category.ANIMAL:
+		return false
+	var def := item.animal as AnimalDef
+	if def == null:
+		return false
+	if InventoryManager.get_count(String(item.id)) <= 0:
+		return false
+
+	var layer := BuildingManager.get_grass_layer()
+	if layer == null or Global.player == null:
+		return false
+	var player_cell: Vector2i = layer.local_to_map(layer.to_local(Global.player.global_position))
+	var pen := BuildingManager.building_at_cell(player_cell) as PlacedBuilding
+	if pen == null or not pen.can_accept(def.animal_type):
+		return false
+
+	InventoryManager.remove_collectable(String(item.id))
 	var animal := def.scene.instantiate() as Node2D
-	# Gán nav layer của chuồng trước khi vào tree → animal chỉ đi trong chuồng này.
+	animal.set_meta("animal_item", String(item.id))
 	var agent := animal.get_node_or_null("NavigationAgent2D") as NavigationAgent2D
 	if agent != null:
-		agent.navigation_layers = _target_pen.pen_nav_layer
-	_target_pen.add_child(animal)
-	animal.position = _target_pen.random_interior_local()
-	# Cấu hình sản xuất theo breed (trứng/sữa, sản lượng).
+		agent.navigation_layers = pen.pen_nav_layer
+	pen.add_child(animal)
+	animal.position = pen.random_interior_local()
 	var prod := animal.get_node_or_null("ProductionComponent")
 	if prod != null and prod.has_method("configure"):
 		prod.configure(def)
-	_target_pen.add_animal()
+	var hunger := animal.get_node_or_null("HungerComponent")
+	if hunger != null and hunger.has_method("configure"):
+		hunger.configure(def)
+	pen.add_animal()
+	return true

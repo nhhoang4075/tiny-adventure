@@ -1,12 +1,22 @@
-[gd_scene load_steps=41 format=3 uid="uid://mky5dl3jkt5c"]
+[gd_scene load_steps=44 format=3 uid="uid://mky5dl3jkt5c"]
 
 [ext_resource type="Texture2D" uid="uid://dc1xuu3oauww7" path="res://assets/animals/Cow/Cow_01.png" id="1_740fv"]
-[ext_resource type="PackedScene" uid="uid://prodcomp0001" path="res://scenes/components/production_component.tscn" id="prod_comp"]
+[ext_resource type="Shader" path="res://scenes/objects/object_fx.gdshader" id="objfx"]
 [ext_resource type="Script" path="res://scenes/characters/npcs/cow/cow.gd" id="1_dmnvg"]
 [ext_resource type="Script" path="res://scripts/state_machine/node_state_machine.gd" id="2_6isjq"]
 [ext_resource type="Script" path="res://scenes/characters/npcs/idle_state.gd" id="4_7syu2"]
 [ext_resource type="Script" path="res://scenes/characters/npcs/walk_state.gd" id="5_kd5cl"]
 [ext_resource type="Script" path="res://scenes/characters/npcs/sleep_state.gd" id="6_5n4hk"]
+[ext_resource type="PackedScene" path="res://scenes/components/hunger_component.tscn" id="hunger_comp"]
+[ext_resource type="PackedScene" uid="uid://prodcomp0001" path="res://scenes/components/production_component.tscn" id="prod_comp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_objfx"]
+resource_local_to_scene = true
+shader = ExtResource("objfx")
+shader_parameter/shake_intensity = 0.0
+shader_parameter/shake_speed = 20.0
+shader_parameter/highlight_color = Color(1, 1, 1, 1)
+shader_parameter/highlight_amount = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o3o71"]
 atlas = ExtResource("1_740fv")
@@ -262,6 +272,7 @@ script = ExtResource("1_dmnvg")
 max_walk_cycle = 3
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_objfx")
 position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_c828d")
 animation = &"idling"
@@ -312,5 +323,8 @@ animated_sprite_2d = NodePath("../../AnimatedSprite2D")
 
 [node name="ProductionComponent" parent="." instance=ExtResource("prod_comp")]
 product_id = &"milk"
+
+[node name="HungerComponent" parent="." instance=ExtResource("hunger_comp")]
+feed_item_id = &"carrot"
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachine/Sleep" method="_on_animation_finished"]

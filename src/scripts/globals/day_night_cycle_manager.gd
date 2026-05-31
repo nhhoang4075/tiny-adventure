@@ -4,6 +4,9 @@ const MINUTES_PER_DAY: int = 24 * 60
 const MINUTES_PER_HOUR: int = 60
 const GAME_MINUTE_DURATION: float = TAU / MINUTES_PER_DAY
 
+## Giờ "buổi sáng" — thời điểm cây/vật nuôi ra sản phẩm (animal đã thức ~5h).
+const MORNING_HOUR: int = 6
+
 var game_speed: float = 5.0
 
 var initial_day: int = 1
@@ -18,6 +21,8 @@ var current_minute: int = initial_minute
 signal game_time(time: float)
 signal time_tick(day: int, hour: int, minute: int)
 signal day_tick(day: int)
+## Phát mỗi sáng (khi giờ chạm MORNING_HOUR) — dùng cho thu hoạch/sản xuất.
+signal morning_tick(day: int)
 
 func _ready() -> void:
 	set_initial_time()
@@ -46,7 +51,9 @@ func recalculate_time() -> void:
 		
 	if current_hour != hour:
 		current_hour = hour
-		
+		if hour == MORNING_HOUR:
+			morning_tick.emit(day)
+
 	if current_day != day:
 		current_day = day
 		day_tick.emit(day)
