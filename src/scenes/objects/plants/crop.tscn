@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://ddbximohrxeko"]
+
+[ext_resource type="Script" path="res://scenes/objects/plants/crop.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bctx6b31tk3gy" path="res://assets/crops/Crops.png" id="2"]
+[ext_resource type="PackedScene" uid="uid://duns5x2k3qlhc" path="res://scenes/objects/plants/watering_particles.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://1r3thd33ngxe" path="res://scenes/objects/plants/flowering_particles.tscn" id="4"]
+[ext_resource type="Shader" path="res://scenes/objects/object_fx.gdshader" id="5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_crop"]
+resource_local_to_scene = true
+shader = ExtResource("5")
+shader_parameter/shake_intensity = 0.0
+shader_parameter/shake_speed = 20.0
+shader_parameter/highlight_color = Color(1, 1, 1, 1)
+shader_parameter/highlight_amount = 0.0
+
+[node name="Crop" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_crop")
+position = Vector2(0, -9)
+texture = ExtResource("2")
+hframes = 7
+vframes = 14
+frame = 2
+
+[node name="WateringParticles" parent="." instance=ExtResource("3")]
+fixed_fps = 60
+
+[node name="FloweringParticles" parent="." instance=ExtResource("4")]
+amount = 4
