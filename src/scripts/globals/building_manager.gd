@@ -8,6 +8,7 @@ var _trees_layer: TileMapLayer
 var _rocks_layer: TileMapLayer
 var _grass_set: Dictionary = {}          # cell -> true
 var _occupied: Dictionary = {}           # cell -> instance_id của công trình
+var _building_cells: Dictionary = {}     # instance_id -> Array[Vector2i] (để phá sạch)
 var _object_cells: Dictionary = {}       # cell -> true (cây/đá đang sống)
 var _is_ready: bool = false
 
@@ -30,20 +31,21 @@ func _try_setup() -> void:
 		_grass_set[cell] = true
 	_is_ready = true
 
-## Quét lại các ô có cây/đá đang sống (gọi trước khi kiểm tra đặt).
+## Quét lại các ô có VẬT CẢN xây (cây/đá/gốc — group "build_obstacle").
+## Dựa trên GROUP chứ không quét cả layer → đồ rớt / vòng progress / highlight (dù
+## nằm trong layer nào) cũng không bị tính là vật cản.
+const OBSTACLE_GROUP := "build_obstacle"
+
 func refresh_objects() -> void:
 	if not _is_ready:
 		_try_setup()
 	if not _is_ready:
 		return
 	_object_cells.clear()
-	for layer in [_trees_layer, _rocks_layer]:
-		if layer == null:
-			continue
-		for child in layer.get_children(true):
-			if child is Node2D:
-				var cell: Vector2i = _grass_layer.local_to_map(_grass_layer.to_local(child.global_position))
-				_object_cells[cell] = true
+	for node in get_tree().get_nodes_in_group(OBSTACLE_GROUP):
+		if node is Node2D:
+			var cell: Vector2i = _grass_layer.local_to_map(_grass_layer.to_local(node.global_position))
+			_object_cells[cell] = true
 
 func get_grass_layer() -> TileMapLayer:
 	if not _is_ready:
@@ -74,10 +76,18 @@ func can_place(cells: Array[Vector2i]) -> bool:
 func register(cells: Array[Vector2i], building_id: int) -> void:
 	for c in cells:
 		_occupied[c] = building_id
+	_building_cells[building_id] = cells.duplicate()
 
 func unregister(cells: Array[Vector2i]) -> void:
 	for c in cells:
 		_occupied.erase(c)
+
+## Gỡ đăng ký toàn bộ ô của 1 công trình (khi phá) — không cần biết cells từ ngoài.
+func remove_building(building_id: int) -> void:
+	var cells: Array = _building_cells.get(building_id, [])
+	for c in cells:
+		_occupied.erase(c)
+	_building_cells.erase(building_id)
 
 ## Ô có bị công trình chiếm không (cả footprint: rào + nội thất).
 func is_occupied(cell: Vector2i) -> bool:

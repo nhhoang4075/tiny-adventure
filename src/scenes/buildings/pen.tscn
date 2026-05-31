@@ -4,6 +4,7 @@
 [ext_resource type="TileSet" uid="uid://do7a502bj8u4k" path="res://tile_sets/game_tile_set.tres" id="2_ts"]
 
 [node name="Pen" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_pen")
 
 [node name="Fence" type="TileMapLayer" parent="."]

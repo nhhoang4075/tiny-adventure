@@ -113,6 +113,7 @@ func _enter() -> void:
 	if BuildingManager.get_grass_layer() == null:
 		return
 	AnimalPlacer.cancel()  # không để 2 chế độ cùng bật
+	RemoveController.cancel()
 	_active = true
 	_rotation = 0
 	ToolManager.select_tool(DataTypes.Tools.None)  # tránh click đặt vô tình chặt/cuốc
