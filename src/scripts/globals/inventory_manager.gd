@@ -66,9 +66,18 @@ func toggle_pin(item_id: String) -> bool:
 func is_pinned(item_id: String) -> bool:
 	return hotbar.has(item_id)
 
-## Bớt 1 item (dùng cho cho ăn / bán). Không xuống dưới 0.
+## Bớt 1 item (dùng cho cho ăn / bán). Khi về 0: xoá khỏi túi và gỡ khỏi hotbar.
 func remove_collectable(collectable_name: String) -> void:
 	var current = inventory.get(collectable_name)
-	if current != null and current > 0:
-		inventory[collectable_name] = current - 1
-		inventory_changed.emit()
+	if current == null or current <= 0:
+		return
+	current -= 1
+	if current <= 0:
+		inventory.erase(collectable_name)
+		# Hết số lượng → tự gỡ khỏi hotbar (ngăn 6 ô) luôn.
+		if hotbar.has(collectable_name):
+			hotbar.erase(collectable_name)
+			hotbar_changed.emit()
+	else:
+		inventory[collectable_name] = current
+	inventory_changed.emit()

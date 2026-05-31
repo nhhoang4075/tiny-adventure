@@ -14,3 +14,4 @@ product_id = &"egg"
 production_interval_days = 1
 yield_min = 1
 yield_max = 1
+feed_item_id = &"wheat"

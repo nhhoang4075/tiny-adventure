@@ -17,3 +17,7 @@ extends Resource
 ## Sản lượng mỗi lần (ngẫu nhiên trong khoảng) — breed khác nhau cho khác nhau.
 @export var yield_min: int = 1
 @export var yield_max: int = 1
+
+## Thức ăn tương ứng (item_id). Phải cho ăn đúng loại MỖI NGÀY thì mới ra sản phẩm.
+## Rỗng = không cần cho ăn.
+@export var feed_item_id: StringName

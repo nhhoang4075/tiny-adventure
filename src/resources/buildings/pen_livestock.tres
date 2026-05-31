@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="BuildingDef" load_steps=3 format=3 uid="uid://penlivestock01"]
+[gd_resource type="Resource" script_class="BuildingDef" load_steps=4 format=3 uid="uid://penlivestock01"]
 
 [ext_resource type="Script" path="res://scripts/resources/building_def.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://penbuild0001" path="res://scenes/buildings/pen.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://pngjhy0npr17" path="res://scenes/buildings/feed_station_large.tscn" id="3"]
 
 [resource]
 script = ExtResource("1")
@@ -15,3 +16,4 @@ cost = 0
 capacity = 4
 animal_type = &"livestock"
 navigation_layer = 2
+feed_station_scene = ExtResource("3")

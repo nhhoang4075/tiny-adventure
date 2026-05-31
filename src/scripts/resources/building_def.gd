@@ -32,6 +32,11 @@ extends Resource
 ## 1 = Chicken Navigation, 2 = Cow Navigation.
 @export var navigation_layer: int = 1
 
+@export_group("Feed Station")
+## Scene khu cho ăn (FeedStation) đặt vào góc nội thất — nơi player tới để cho ăn.
+## Để trống = chuồng không có khu cho ăn.
+@export var feed_station_scene: PackedScene
+
 ## Cấp cao hơn để nâng cấp (upsize). Để trống nếu là cấp tối đa.
 ## Kiểu Resource để tránh tự tham chiếu; ép sang BuildingDef khi dùng.
 @export var next_tier: Resource

@@ -1,55 +1,60 @@
 extends Node
 
-class ItemData:
-	var id: String
-	var display_name: String
-	var icon: Texture2D
-	var is_tool: bool
-	var tool: DataTypes.Tools
+## Đăng ký vật phẩm data-driven: quét res://resources/items/*.tres (ItemDef) khi
+## khởi động. Thêm vật phẩm mới = thả 1 file .tres, KHÔNG cần sửa code.
 
-	func _init(p_id: String, p_name: String, p_icon: Texture2D, p_is_tool: bool = false, p_tool: DataTypes.Tools = DataTypes.Tools.None) -> void:
-		id = p_id
-		display_name = p_name
-		icon = p_icon
-		is_tool = p_is_tool
-		tool = p_tool
+const ITEMS_DIR := "res://resources/items/"
 
-const TOOL_ICONS_PATH := "res://assets/icons/Outline/Tool_Icons_Outline.png"
-const FOOD_ICONS_PATH := "res://assets/icons/Outline/Food_Icons_Outline.png"
-const RESOURCE_ICONS_PATH := "res://assets/icons/Outline/Resources_Icons_Outline.png"
+const SHEET_PATHS := {
+	ItemDef.IconSheet.TOOL: "res://assets/icons/Outline/Tool_Icons_Outline.png",
+	ItemDef.IconSheet.FOOD: "res://assets/icons/Outline/Food_Icons_Outline.png",
+	ItemDef.IconSheet.RESOURCE: "res://assets/icons/Outline/Resources_Icons_Outline.png",
+	ItemDef.IconSheet.OTHER: "res://assets/icons/Outline/Other_Icons_Outline.png",
+}
 
-var items: Dictionary = {}
-var ordered_ids: Array[String] = []
+var items: Dictionary = {}          # id (String) -> ItemDef
+var ordered_ids: Array[String] = []  # theo sort_order
+var _sheets: Dictionary = {}         # path -> Texture2D (cache)
 
 func _ready() -> void:
-	_register_tools()
-	_register_collectables()
+	_load_items()
 
-func _register_tools() -> void:
-	_add("axe", "Axe", TOOL_ICONS_PATH, Rect2(48, 0, 16, 16), true, DataTypes.Tools.Axe)
-	_add("pickaxe", "Pickaxe", TOOL_ICONS_PATH, Rect2(32, 0, 16, 16), true, DataTypes.Tools.Pickaxe)
-	_add("hoe", "Hoe", TOOL_ICONS_PATH, Rect2(80, 0, 16, 16), true, DataTypes.Tools.Hoe)
-	_add("watering_can", "Watering Can", TOOL_ICONS_PATH, Rect2(96, 0, 16, 16), true, DataTypes.Tools.WateringCan)
-	_add("seed_wheat", "Wheat Seed", FOOD_ICONS_PATH, Rect2(16, 48, 16, 16), true, DataTypes.Tools.SeedWheat)
-	_add("seed_tomato", "Tomato Seed", FOOD_ICONS_PATH, Rect2(16, 64, 16, 16), true, DataTypes.Tools.SeedTomato)
+func _load_items() -> void:
+	var defs: Array = []
+	var dir := DirAccess.open(ITEMS_DIR)
+	if dir == null:
+		push_error("ItemRegistry: không mở được " + ITEMS_DIR)
+		return
+	for file in dir.get_files():
+		var fname := file.trim_suffix(".remap")
+		if not (fname.ends_with(".tres") or fname.ends_with(".res")):
+			continue
+		var res = load(ITEMS_DIR + fname)
+		if res is ItemDef and res.id != StringName(""):
+			defs.append(res)
+	defs.sort_custom(func(a, b): return a.sort_order < b.sort_order)
+	for def in defs:
+		def.icon = _build_icon(def)
+		def.is_tool = def.category == ItemDef.Category.TOOL or def.category == ItemDef.Category.SEED
+		var key := String(def.id)
+		items[key] = def
+		ordered_ids.append(key)
 
-func _register_collectables() -> void:
-	_add("log", "Log", RESOURCE_ICONS_PATH, Rect2(0, 64, 16, 16))
-	_add("stone", "Stone", RESOURCE_ICONS_PATH, Rect2(0, 0, 16, 16))
-	_add("wheat", "Wheat", FOOD_ICONS_PATH, Rect2(0, 48, 16, 16))
-	_add("tomato", "Tomato", FOOD_ICONS_PATH, Rect2(0, 64, 16, 16))
-	_add("egg", "Egg", FOOD_ICONS_PATH, Rect2(96, 16, 16, 16))
-	_add("milk", "Milk", FOOD_ICONS_PATH, Rect2(112, 0, 16, 16))
-
-func _add(id: String, display_name: String, atlas_path: String, region: Rect2, is_tool: bool = false, tool: DataTypes.Tools = DataTypes.Tools.None) -> void:
+func _build_icon(def: ItemDef) -> Texture2D:
+	if def.icon_override != null:
+		return def.icon_override
+	var path: String = SHEET_PATHS.get(def.icon_sheet, "")
+	if path == "":
+		return null
+	if not _sheets.has(path):
+		_sheets[path] = load(path)
 	var atlas := AtlasTexture.new()
-	atlas.atlas = load(atlas_path)
-	atlas.region = region
-	items[id] = ItemData.new(id, display_name, atlas, is_tool, tool)
-	ordered_ids.append(id)
+	atlas.atlas = _sheets[path]
+	atlas.region = def.icon_region
+	return atlas
 
-func get_item(id: String) -> ItemData:
-	return items.get(id)
+func get_item(id) -> ItemDef:
+	return items.get(String(id))
 
-func has(id: String) -> bool:
-	return items.has(id)
+func has(id) -> bool:
+	return items.has(String(id))

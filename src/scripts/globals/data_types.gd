@@ -6,8 +6,7 @@ enum Tools {
 	Pickaxe,
 	Hoe,
 	WateringCan,
-	SeedWheat,
-	SeedTomato
+	Seed,
 }
 
 enum GrowthStates {

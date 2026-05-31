@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/item_def.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"log"
+display_name = "Log"
+category = 4
+icon_sheet = 2
+icon_region = Rect2(0, 64, 16, 16)
+sell_price = 4
+tool = 0
+sort_order = 20

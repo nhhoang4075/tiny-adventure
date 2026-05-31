@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CropDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/crop_def.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bctx6b31tk3gy" path="res://assets/crops/Crops.png" id="2"]
+
+[resource]
+script = ExtResource("1")
+id = &"carrot"
+display_name = "Carrot"
+sprite_sheet = ExtResource("2")
+hframes = 7
+vframes = 14
+sprite_row = 2
+sprite_first_col = 2
+growth_stages = 5
+days_to_harvest = 4
+product_id = &"carrot"
+yield_min = 1
+yield_max = 2
+regrow_days = 0
