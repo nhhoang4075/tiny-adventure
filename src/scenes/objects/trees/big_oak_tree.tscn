@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://dyfgrj6ks4fyd"]
 
 [ext_resource type="Texture2D" uid="uid://gtg04eiik5yw" path="res://assets/trees/Oak_Tree.png" id="1_468fy"]
-[ext_resource type="Shader" path="res://scenes/objects/shake.gdshader" id="1_jh3gi"]
+[ext_resource type="Shader" path="res://scenes/objects/object_fx.gdshader" id="1_jh3gi"]
 [ext_resource type="Script" path="res://scenes/objects/trees/big_oak_tree.gd" id="2_i5jb7"]
 [ext_resource type="PackedScene" uid="uid://eoa17gcxug7a" path="res://scenes/components/hurt_component.tscn" id="3_gwo0w"]
 [ext_resource type="PackedScene" uid="uid://cp00hvc80ubx6" path="res://scenes/components/damage_component.tscn" id="4_4k81g"]

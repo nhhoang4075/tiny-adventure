@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bgf51u6n3j62j"]
 
-[ext_resource type="Shader" path="res://scenes/objects/shake.gdshader" id="1_d4kpi"]
+[ext_resource type="Shader" path="res://scenes/objects/object_fx.gdshader" id="1_d4kpi"]
 [ext_resource type="Texture2D" uid="uid://drfrjkiprtnkq" path="res://assets/outdoor_decoration/Ores.png" id="1_n56yr"]
 [ext_resource type="Script" path="res://scenes/objects/rocks/rock.gd" id="2_ehwrv"]
 [ext_resource type="PackedScene" uid="uid://eoa17gcxug7a" path="res://scenes/components/hurt_component.tscn" id="3_fvp38"]

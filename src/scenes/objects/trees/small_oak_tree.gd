@@ -1,16 +1,17 @@
 extends Sprite2D
 
-@onready var hurt_component: HurtComponent = $HurtComponent
+@onready var tool_hit_component: ToolHitComponent = $HurtComponent
 @onready var damage_component: DamageComponent = $DamageComponent
 
 var stump_scene = preload("res://scenes/objects/trees/small_oak_stump.tscn")
 
 func _ready() -> void:
-	hurt_component.hurt.connect(on_hurt)
+	add_to_group("build_obstacle")  # chặn đặt công trình lên ô có cây
+	tool_hit_component.tool_hit.connect(on_tool_hit)
 	damage_component.max_damage_reached.connect(on_max_damage_reached)
 
-func on_hurt(hit_damage: int) -> void:
-	damage_component.apply_damage(hit_damage)
+func on_tool_hit(_tool: DataTypes.Tools, power: int) -> void:
+	damage_component.apply_damage(power)
 	material.set_shader_parameter("shake_intensity", 0.5)
 	await get_tree().create_timer(0.5).timeout
 	material.set_shader_parameter("shake_intensity", 0.0)
